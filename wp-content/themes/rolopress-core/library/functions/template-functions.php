@@ -33,8 +33,8 @@ function rolo_contact_header($contact_id) {
 			<?php 
 			if ($contact['rolo_contact_title'] != "") { ?>
 				<span class="title" id="rolo_contact_title"><?php echo $contact['rolo_contact_title'];?></span><?php }
-			if (get_the_term_list($contact_id, 'company') != "") { ?>
-				<span class="org"><?php echo get_the_term_list($contact_id, 'company', ''); ?></span><?php }
+	/*		if (get_the_term_list($contact_id, 'company') != "") { ?>
+				<span class="org"><?php echo get_the_term_list($contact_id, 'company', ''); ?></span><?php }*/
 			?>
             </li>
 			<?php if ($contact['rolo_contact_email'] != "") { ?><li class="email url-field"><a class="email" href="mailto:<?php echo $contact['rolo_contact_email'];?>"><?php echo $contact['rolo_contact_email'];?> </a><span id="rolo_contact_email" class="edit-icon" style=""><?php echo $contact['rolo_contact_email']; ?></span></li><?php } ?>

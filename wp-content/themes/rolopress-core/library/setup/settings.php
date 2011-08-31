@@ -143,10 +143,10 @@ add_action('init', 'rolo_set_permalinks');
 				$menu_id,
 				0,
 				array(
-					'menu-item-title' => __('Contacts','rolopress'),
+					'menu-item-title' => __('Contactos','rolopress'),
 					'menu-item-type' => 'taxonomy',
 					'menu-item-object' => 'type',
-					'menu-item-attr-title' => __('Contacts','rolopress'),
+					'menu-item-attr-title' => __('Contactos','rolopress'),
 					'menu-item-classes' => 'contacts',
 					'menu-item-object-id' => $term_id,
 					'menu-item-position' => 2,
@@ -155,16 +155,16 @@ add_action('init', 'rolo_set_permalinks');
 			);
  
 			// Add "Add Contact" page
-			$page = get_page_by_title('Add Contact');
+			$page = get_page_by_title('Adicionar Contacto');
 			$page_id = $page->ID; 
 			wp_update_nav_menu_item(
 				$menu_id,
 				0,
 				array(
-					'menu-item-title' => __('Add Contact','rolopress'),
+					'menu-item-title' => __('Adicionar Contacto','rolopress'),
 					'menu-item-type' => 'post_type',
 					'menu-item-object' => 'page',
-					'menu-item-attr-title' => __('Add Contact','rolopress'),
+					'menu-item-attr-title' => __('Adicionar Contacto','rolopress'),
 					'menu-item-classes' => 'add-contacts icon-add',
 					'menu-item-object-id' => $page_id,
 					'menu-item-position' => 3,
@@ -173,7 +173,7 @@ add_action('init', 'rolo_set_permalinks');
 			);
 	
 			// Add "Company" taxonomy archive
-			$term = get_term_by( 'slug', 'company', 'type');
+		/*	$term = get_term_by( 'slug', 'company', 'type');
 			$term_id = $term->term_id; 
 			wp_update_nav_menu_item(
 				$menu_id,
@@ -188,10 +188,10 @@ add_action('init', 'rolo_set_permalinks');
 					'menu-item-position' => 4,
 					'menu-item-status' => 'publish'
 				)
-			);
+			);*/
 
 			// Add "Add Company" page
-			$page = get_page_by_title('Add Company');
+		/*	$page = get_page_by_title('Add Company');
 			$page_id = $page->ID; 
 			wp_update_nav_menu_item(
 				$menu_id,
@@ -206,7 +206,7 @@ add_action('init', 'rolo_set_permalinks');
 					'menu-item-position' => 5,
 					'menu-item-status' => 'publish'
 				)
-			);
+			);*/
 	}
 }
 add_action('init', 'rolopress_create_menus');

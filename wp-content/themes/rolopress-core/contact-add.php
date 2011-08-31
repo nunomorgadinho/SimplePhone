@@ -30,5 +30,5 @@ get_header(); ?>
 	</div><!-- #container -->
 	<?php rolopress_after_container(); // After container hook ?>
 		
-<?php get_sidebar(); ?>	
+<?php //get_sidebar(); ?>	
 <?php get_footer(); ?>

@@ -23,17 +23,17 @@ function rolo_add_contact() {
         if (isset($_POST['rp_add_contact']) && $_POST['rp_add_contact'] == 'add_contact') {
             $contact_id = _rolo_save_contact_fields();
             if ($contact_id) {
-                echo __("Contact information successfully added.", 'rolopress');
+                echo __("Contacto adicionado com sucesso.", 'rolopress');
             } else {
-                echo __("There was some problem in inserting the contact info", 'rolopress');
+                echo __("Ocorreu um erro ao inserir o contacto", 'rolopress');
     //            TODO - Handle Error properly
             }
         } elseif (isset($_POST['rp_add_notes']) && $_POST['rp_add_notes'] == 'add_notes') {
             if (_rolo_save_contact_notes()) {
-                echo __("Notes successfully added.", 'rolopress');
+                echo __("Comentários adicionados com sucesso.", 'rolopress');
             } else {
     //            TODO - Handle Error properly
-                echo __("There was some problem in inserting the notes", 'rolopress');
+                echo __("Ocorreu um erro ao inserir o comentário", 'rolopress');
             }
         } else {
             _rolo_show_contact_fields();
@@ -58,9 +58,9 @@ function rolo_edit_contact() {
         if (isset($_POST['rp_edit_contact']) && $_POST['rp_edit_contact'] == 'edit_contact') {
             $contact_id = _rolo_save_contact_fields();
             if ($contact_id) {
-                echo __("Contact information successfully added.", 'rolopress');
+                echo __("Contacto editado com sucesso.", 'rolopress');
             } else {
-                echo __("There was some problem in inserting the contact info", 'rolopress');
+                echo __("Ocorreu um erro ao editar o contacto", 'rolopress');
     //            TODO - Handle Error properly
             }
         } else {
@@ -88,7 +88,7 @@ function _rolo_show_edit_contact_form($contact_id) {
 ?>
 <form action="" method="post" class="uniForm inlineLabels" id="contact-edit">
     <div id="errorMsg">
-        <h3><?php _e('Mandatory fields are not filled.', 'rolopress');?></h3>
+        <h3><?php _e('Campos obrigatórios não estão preenchidos.', 'rolopress');?></h3>
     </div>
 
     <fieldset class="inlineLabels">
@@ -200,7 +200,7 @@ function _rolo_show_contact_fields() {
     </fieldset>
    <div class="buttonHolder">
       <input type="hidden" name="rp_add_contact" value="add_contact" />
-      <button type="submit" name="submit" id="add_contact" class="submitButton" tabindex="<?php echo $rolo_tab_index++;?>" ><?php _e('Add Contact', 'rolopress');?></button>
+      <button type="submit" name="submit" id="add_contact" class="submitButton" tabindex="<?php echo $rolo_tab_index++;?>" ><?php _e('Adicionar Contacto', 'rolopress');?></button>
    </div>
 </form>
 <?php
@@ -354,14 +354,14 @@ function rolo_setup_contact_address($field_name, &$rolo_tab_index, $contact_id =
         $zip = rolo_get_term_list($contact_id, 'zip');
         $country = rolo_get_term_list($contact_id, 'country');
 
-        $city = ($city == '') ? 'City' : $city;
-        $state = ($state == '') ? 'State' : $state;
-        $zip = ($zip == '') ? 'Zip' : $zip;
-        $country = ($country == '') ? 'Country' : $country;
+        $city = ($city == '') ? 'Cidade' : $city;
+     //   $state = ($state == '') ? 'State' : $state;
+        $zip = ($zip == '') ? 'Código Postal' : $zip;
+        $country = ($country == '') ? 'País' : $country;
 ?>
         <div class="ctrlHolder nolabel">
             <input type="text" name="rolo_contact_city" value="<?php echo $city ;?>" size="30" tabindex="<?php echo $rolo_tab_index++;?>" class="textInput city" />
-			<input type="text" name="rolo_contact_state" value="<?php echo $state ;?>" size="15" tabindex="<?php echo $rolo_tab_index++;?>" class="textInput state" />
+	<!-- 		<input type="text" name="rolo_contact_state" value="<?php echo $state ;?>" size="15" tabindex="<?php echo $rolo_tab_index++;?>" class="textInput state" /> -->
             <input type="text" name="rolo_contact_zip" value="<?php echo $zip ;?>" size="10" tabindex="<?php echo $rolo_tab_index++;?>" class="textInput zip" />
 		</div>
 
@@ -386,10 +386,10 @@ function rolo_save_contact_address($field_name, $post_id, &$new_contact) {
     $new_contact['rolo_contact_address'] = $_POST['rolo_contact_address'];
 
     // store the rest as custom taxonomies
-    wp_set_post_terms($post_id, ($_POST['rolo_contact_city'] == 'City') ? '' : $_POST['rolo_contact_city'], 'city');
+    wp_set_post_terms($post_id, ($_POST['rolo_contact_city'] == 'Cidade') ? '' : $_POST['rolo_contact_city'], 'city');
     wp_set_post_terms($post_id, ($_POST['rolo_contact_state'] == 'State') ? '' : $_POST['rolo_contact_state'], 'state');
-    wp_set_post_terms($post_id, ($_POST['rolo_contact_zip'] == 'Zip') ? '' : $_POST['rolo_contact_zip'], 'zip');
-    wp_set_post_terms($post_id, ($_POST['rolo_contact_country'] == 'Country') ? '' : $_POST['rolo_contact_country'], 'country');
+    wp_set_post_terms($post_id, ($_POST['rolo_contact_zip'] == 'Código Postal') ? '' : $_POST['rolo_contact_zip'], 'zip');
+    wp_set_post_terms($post_id, ($_POST['rolo_contact_country'] == 'País') ? '' : $_POST['rolo_contact_country'], 'country');
 }
 
 /**

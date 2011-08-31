@@ -20,13 +20,13 @@ array
     'class' => 'first_name',
     'filter' => "rolo_contact_first_name",
     'default_value' => '',
-    'title' => __('First Name','rolopress'),
+    'title' => __('Nome','rolopress'),
     'description' => '',
     'setup_function' => '',
     'save_function' => '',
     'mandatory' => true
     ),
-    "last_name"=>
+/*    "last_name"=>
     array
     (
     'name' => 'last_name',
@@ -77,22 +77,22 @@ array
     'setup_function' => '',
     'save_function' => '',
     'mandatory' => false
-    ),
+    ),*/
     "phone" =>
     array
     (
-    'multiple' => array (__('Home','rolopress'), __('Mobile','rolopress'), __('Work','rolopress'), __('Fax','rolopress'), __('Other','rolopress'),),
+    'multiple' => array (__('Casa','rolopress'), __('Telemóvel','rolopress'), __('Trabalho','rolopress'), __('Fax','rolopress'), __('Outro','rolopress'),),
     'name' => 'phone',
     'class' => 'phone',
     'filter' => "rolo_contact_phone_",
     'default_value' => '',
-    'title' => __('Phone','rolopress'),
+    'title' => __('Telefone','rolopress'),
     'description' => '',
     'setup_function' => 'rolo_setup_contact_multiple',
     'save_function' => 'rolo_save_contact_multiple',
     'mandatory' => false
     ),
-    "website" =>
+ /*   "website" =>
     array
     (
     'name' => 'website',
@@ -133,7 +133,7 @@ array
     'save_function' => '',
 	'prefix' => 'http://twitter.com/',
     'mandatory' => false
-    ),
+    ),*/
     "address" =>
     array
     (
@@ -141,12 +141,12 @@ array
     'class' => 'address',
     'filter' => "rolo_contact_address",
     'default_value' => '',
-    'title' => __('Address','rolopress'),
+    'title' => __('Morada','rolopress'),
     'description' => '',
     "setup_function" => 'rolo_setup_contact_address',
     'save_function' => 'rolo_save_contact_address',
     'mandatory' => false
-    ),
+    )/*,
     'info' =>
     array
     (
@@ -172,7 +172,7 @@ array
     'setup_function' => 'rolo_setup_contact_post_tags',
     'save_function' => '',
     'mandatory' => false
-    )
+    )*/
 );
 
 $company_fields =
@@ -307,11 +307,11 @@ array
  */
 function rolo_create_taxonomy() {
     register_taxonomy( 'type', 'post', array( 'hierarchical' => false, 'label' => __('Rolopress Type', 'rolopress'), 'query_var' => true, 'rewrite' => true ) );
-    register_taxonomy( 'company', 'post', array( 'hierarchical' => false, 'label' => __('Company', 'rolopress'), 'query_var' => true, 'rewrite' => true ) );
-    register_taxonomy( 'city', 'post', array( 'hierarchical' => false, 'label' => __('City', 'rolopress'), 'query_var' => true, 'rewrite' => true ) );
-    register_taxonomy( 'state', 'post', array( 'hierarchical' => false, 'label' => __('State', 'rolopress'), 'query_var' => true, 'rewrite' => true ) );
-    register_taxonomy( 'zip', 'post', array( 'hierarchical' => false, 'label' => __('Zip', 'rolopress'), 'query_var' => true, 'rewrite' => true ) );
-    register_taxonomy( 'country', 'post', array( 'hierarchical' => false, 'label' => __('Country', 'rolopress'), 'query_var' => true, 'rewrite' => true ) );
+ /*   register_taxonomy( 'company', 'post', array( 'hierarchical' => false, 'label' => __('Company', 'rolopress'), 'query_var' => true, 'rewrite' => true ) );*/
+    register_taxonomy( 'city', 'post', array( 'hierarchical' => false, 'label' => __('Cidade', 'rolopress'), 'query_var' => true, 'rewrite' => true ) );
+  /*  register_taxonomy( 'state', 'post', array( 'hierarchical' => false, 'label' => __('State', 'rolopress'), 'query_var' => true, 'rewrite' => true ) );*/
+    register_taxonomy( 'zip', 'post', array( 'hierarchical' => false, 'label' => __('Código Postal', 'rolopress'), 'query_var' => true, 'rewrite' => true ) );
+    register_taxonomy( 'country', 'post', array( 'hierarchical' => false, 'label' => __('País', 'rolopress'), 'query_var' => true, 'rewrite' => true ) );
 }
 add_action('init', 'rolo_create_taxonomy', 0);
 

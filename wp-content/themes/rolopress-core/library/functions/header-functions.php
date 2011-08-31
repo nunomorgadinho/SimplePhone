@@ -145,13 +145,13 @@ function rolopress_default_top_menu_right() { ?>
                     }
 ?>
                     <input id="s" name="s" type="text" value="<?php echo wp_specialchars(stripslashes($s), true) ?>" size="20" tabindex="1" />
-                    <input id="searchsubmit" name="searchsubmit" type="submit" value="<?php _e('Search', 'rolopress') ?>" tabindex="2" />
+                    <input id="searchsubmit" name="searchsubmit" type="submit" value="<?php _e('Procurar', 'rolopress') ?>" tabindex="2" />
                 </form>
             </li>
             <?php global $user_ID, $user_identity, $user_level ?>
-            <?php if ( $user_level >= 1 ) : ?>
-                <li><a title="settings" href="<?php bloginfo('url') ?>/wp-admin/"><span><?php _e('Settings', 'rolopress') ?></span></a></li>
-            <?php endif // $user_level >= 1 ?>
+            <?php //if ( $user_level >= 1 ) : ?>
+               <!--  <li><a title="settings" href="<?php bloginfo('url') ?>/wp-admin/"><span><?php _e('Settings', 'rolopress') ?></span></a></li> -->
+            <?php // endif // $user_level >= 1 ?>
             <li><?php wp_loginout(); ?></li>
         </ul>
 <?php
