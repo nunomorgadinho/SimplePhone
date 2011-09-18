@@ -6,7 +6,8 @@
 		<?php rolopress_before_main(); // Before main hook ?>
 		<div id="main">
 
-				<?php rolo_pageheader();?>
+
+				<?php //rolo_pageheader();?>
 				<?php rolo_sorter();?>
 				<?php rolo_loop();?>
 			
@@ -16,5 +17,5 @@
 	</div><!-- #container -->
 	<?php rolopress_after_container(); // After container hook ?>
 
-<?php get_sidebar(); ?>	
-<?php get_footer(); ?>
+<?php //get_sidebar(); ?>	
+<?php //get_footer(); ?>

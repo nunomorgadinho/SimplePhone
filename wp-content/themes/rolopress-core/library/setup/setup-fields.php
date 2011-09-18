@@ -81,16 +81,16 @@ array
     "phone" =>
     array
     (
-    'multiple' => array (__('Casa','rolopress'), __('Telemóvel','rolopress'), __('Trabalho','rolopress'), __('Fax','rolopress'), __('Outro','rolopress'),),
+   	//'multiple' => array (__('Casa','rolopress'), __('Telemóvel','rolopress'), __('Trabalho','rolopress'), __('Fax','rolopress'), __('Outro','rolopress'),),
     'name' => 'phone',
     'class' => 'phone',
     'filter' => "rolo_contact_phone_",
     'default_value' => '',
-    'title' => __('Telefone','rolopress'),
+    'title' => __('Telefone (skype)','rolopress'),
     'description' => '',
-    'setup_function' => 'rolo_setup_contact_multiple',
-    'save_function' => 'rolo_save_contact_multiple',
-    'mandatory' => false
+    'setup_function' => '',
+    'save_function' => '',
+    'mandatory' => true
     ),
  /*   "website" =>
     array

@@ -17,7 +17,7 @@
     border:none;
     margin:0; padding:0;
     /* user prefs */
-    border-bottom:1px solid #efefef;
+ /*   border-bottom:1px solid #efefef;*/
 }
 .uniForm fieldset legend{
     color:#000; /* Reset IE */

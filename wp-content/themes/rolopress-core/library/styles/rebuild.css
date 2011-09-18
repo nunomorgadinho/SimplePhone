@@ -9,7 +9,7 @@
 
 
 body {
-    background: #fff;
+    background: #fff url(../images/wallpaper.png);
 }
 body, input, textarea {
     color: #111;

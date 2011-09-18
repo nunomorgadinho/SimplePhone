@@ -26,7 +26,7 @@ function rolo_contact_header($contact_id) {
 ?>
     <ul id="hcard-<?php echo basename(get_permalink());?>" class="item-header">
 
-			<?php echo get_avatar (($contact['rolo_contact_email']),96, rolo_get_twitter_profile_image($contact['rolo_contact_twitter'], ROLOPRESS_IMAGES . "/icons/rolo-contact.jpg") );?>
+			<?php //echo get_avatar (($contact['rolo_contact_email']),96, rolo_get_twitter_profile_image($contact['rolo_contact_twitter'], ROLOPRESS_IMAGES . "/icons/rolo-contact.jpg") );?>
 
 			<li><a class="fn" href="<?php the_permalink();?>"><?php echo $contact['rolo_contact_first_name'] . ' ' . $contact['rolo_contact_last_name'];?></a></li>
 			<li>
@@ -37,7 +37,15 @@ function rolo_contact_header($contact_id) {
 				<span class="org"><?php echo get_the_term_list($contact_id, 'company', ''); ?></span><?php }*/
 			?>
             </li>
-			<?php if ($contact['rolo_contact_email'] != "") { ?><li class="email url-field"><a class="email" href="mailto:<?php echo $contact['rolo_contact_email'];?>"><?php echo $contact['rolo_contact_email'];?> </a><span id="rolo_contact_email" class="edit-icon" style=""><?php echo $contact['rolo_contact_email']; ?></span></li><?php } ?>
+			
+			<?php if (false/*$contact['rolo_contact_email'] != ""*/) { ?>
+			<li class="email url-field">
+			<a class="email" href="mailto:<?php echo $contact['rolo_contact_email'];?>">
+			<?php echo $contact['rolo_contact_email'];?> 
+			</a><span id="rolo_contact_email" class="edit-icon" style="">
+			<?php echo $contact['rolo_contact_email']; ?>
+			</span></li>
+			<?php } ?>
 
 			<?php rolopress_after_contact_header();?>
     </ul><!-- hcard -->
@@ -70,8 +78,9 @@ function rolo_contact_details($contact_id) {
 			<?php if ($contact['rolo_contact_title'] != "") { ?>
 			<li class="title" id="rolo_contact_title"><?php echo $contact['rolo_contact_title'];?></li><?php }
 			?>
-			<?php if (get_the_term_list($contact_id, 'company') != "") { ?>
-			<li class="org"><span class="value"><?php echo get_the_term_list($contact_id, 'company', ''); ?></span></li><?php }
+			<?php //if (get_the_term_list($contact_id, 'company') != "") { ?>
+			<!-- <li class="org"><span class="value"><?php echo get_the_term_list($contact_id, 'company', ''); ?></span></li>  -->
+			<?php //}
 			?>
 				
 			<?php $rolo_contact_full_address = $contact['rolo_contact_address'] . get_the_term_list($contact_id, 'city', '', '', '') . get_the_term_list($contact_id, 'state', '', '', '') . get_the_term_list($contact_id, 'zip', '', '', '') . get_the_term_list($contact_id, 'country', '', '', '');

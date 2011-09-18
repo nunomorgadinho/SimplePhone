@@ -92,7 +92,8 @@ function rolo_css_widget_areas() {
 	if ($rolo_print_primary != "on") { echo '<link rel="stylesheet" type="text/css" href="' . ROLOPRESS_CSS_PRINT . '/hide-primary.css" media="print" />' . "\r";};
 	if ($rolo_print_secondary != "on") { echo '<link rel="stylesheet" type="text/css" href="' . ROLOPRESS_CSS_PRINT . '/hide-secondary.css" media="print" />' . "\r";};
 	if ($rolo_print_contact_under_main != "on") { echo '<link rel="stylesheet" type="text/css" href="' . ROLOPRESS_CSS_PRINT . '/hide-contact-under-main.css" media="print" />' . "\r";};
-	if ($rolo_print_company_under_main != "on") { echo '<link rel="stylesheet" type="text/css" href="' . ROLOPRESS_CSS_PRINT . '/hide-company-under-main" media="print" />' . "\r";};
+	/*if ($rolo_print_company_under_main != "on") { echo '<link rel="stylesheet" type="text/css" href="' . ROLOPRESS_CSS_PRINT . '/hide-company-under-main" media="print" />' . "\r";};*/
+	
 }
 add_action ('wp_head','rolo_css_widget_areas');
 
@@ -152,7 +153,8 @@ function rolopress_default_top_menu_right() { ?>
             <?php //if ( $user_level >= 1 ) : ?>
                <!--  <li><a title="settings" href="<?php bloginfo('url') ?>/wp-admin/"><span><?php _e('Settings', 'rolopress') ?></span></a></li> -->
             <?php // endif // $user_level >= 1 ?>
-            <li><?php wp_loginout(); ?></li>
+            <li><?php $siteurl = get_bloginfo('siteurl');
+            		  if(get_current_user_id() ==0) wp_register(); wp_loginout($siteurl);?></li>
         </ul>
 <?php
 }

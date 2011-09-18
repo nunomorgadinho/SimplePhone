@@ -132,22 +132,48 @@ function rolo_notes () {
 function rolo_edit_item() {
 		if ( current_user_can('edit_posts') ) { ?>
                 <span>
-				<?php if (!is_page() ) echo '<span class="meta-sep"> | </span>'; // seperates notes and edit link: not needed on pages ?>
-                <?php
+			       <?php
 					if (rolo_type_is('contact')) {
-						$edit_contact_page = get_page_by_title('Edit Contact');
+						$edit_contact_page = get_page_by_title('Editar Contacto');
+												
 						?>
-						<a class="post-edit-link" href="<?php echo get_permalink($edit_contact_page->ID) . '?id=' . get_the_ID(); ?>" ><?php _e('Edit', 'rolopress'); ?></a>
+						<a class="post-edit-link" href="<?php echo get_permalink($edit_contact_page->ID) . '?id=' . get_the_ID(); ?>" ><?php _e('Editar', 'rolopress'); ?></a>
 						<?php
 					}
 					elseif (rolo_type_is('company')) {
 						$edit_company_page = get_page_by_title('Edit Company');
 						?>
-						<a class="post-edit-link" href="<?php echo get_permalink($edit_company_page->ID) . '?id=' . get_the_ID(); ?>" ><?php _e('Edit', 'rolopress'); ?></a>
+						<a class="post-edit-link" href="<?php echo get_permalink($edit_company_page->ID) . '?id=' . get_the_ID(); ?>" ><?php _e('Editar', 'rolopress'); ?></a>
 						<?php
 					}
 					else {
-						edit_post_link(__('Edit','rolopress'), '','');
+						edit_post_link(__('Editar','rolopress'), '','');
+					};
+                ?>
+                </span>
+            <?php
+	}
+};
+
+/**
+ * Show Remove link if user has proper permissions
+ *
+ * @since 1.2
+ */
+function rolo_remove_item() {
+		if ( current_user_can('delete_posts') ) { ?>
+                <span>
+				<?php if (!is_page() ) echo '<span class="meta-sep"> | </span>'; // seperates notes and edit link: not needed on pages ?>
+                <?php
+					if (rolo_type_is('contact')) {
+						$edit_contact_page = get_page_by_title('Editar Contacto');
+												
+						?>
+						<a class="post-edit-link" href="<?php echo get_permalink($edit_contact_page->ID) . '?id=' . get_the_ID().'&action=delete'; ?>" ><?php _e('Remover', 'rolopress'); ?></a>
+						<?php
+					}
+					else {
+						edit_post_link(__('Remover','rolopress'), '','');
 					};
                 ?>
                 </span>
@@ -172,9 +198,13 @@ function rolo_entry_footer() {
 					
 		<div class="entry-utility group">
 			<?php rolo_category_list(); ?>
-			<?php rolo_tag_list(); ?>
-			<?php if ($post->post_type == 'post') { rolo_notes();}  // only show notes for posts  ?>
 			<?php rolo_edit_item(); ?>
+			<?php rolo_remove_item(); ?>
+			<?php //rolo_tag_list(); ?>
+			
+			<?php //if ($post->post_type == 'post') { rolo_notes();}  // only show notes for posts  ?>
+			
+			
 		</div><!-- #entry-utility -->
 <?php 
 };
@@ -287,92 +317,148 @@ return $query;
  */
 function rolo_loop() { ?>
 <?php if (!is_single() ) { // This class is not needed on single pages ?>
-	<ul class="item-list">
+<!-- 	<ul class="item-list">  -->
 <?php }; ?>
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-		<li id="entry-<?php the_ID(); ?>" class="<?php rolopress_entry_class(); ?>">
+	<?php 
+	
+		$current_user_id = get_current_user_id();
+		global $post;
+		$author_id = $post->post_author;
 		
-			<?php rolopress_before_entry(); // Before entry hook ?>
+		if($current_user_id != $author_id)
+			continue;
 
-				<div class="entry-main group">
+		if ( (is_archive() || is_home())) 
+		{
+				
+			$thumbid = get_post_thumbnail_id($post->ID);							
+			$thumb = wp_get_attachment_image_src($thumbid,'thumbnail');
+					
+			$srcimage =  $thumb[0];
+			if(isset($srcimage))
+				$style = "background:url(".$srcimage.") no-repeat;";
+			else
+				$style = "background: transparent no-repeat";		
+			$link = get_permalink();
+				
+		?>
+		<div id="contact">		
+			<div class="photo" >
+				<a href="<?php echo $link;?>">
+				<span style="<?php echo $style;?>"></span>
+				</a>
+					<img src="<?php echo get_bloginfo('template_url').'/library/images/gold-frame.png';?>" alt="">		
+				<div class="title">
+					<?php the_title();?>
+				</div>
+			</div>
+		</div>	<!-- close div contact -->
+			<?php 
+			continue;
+			}
+			
+					
+		if (is_single() ) 
+		{  
+			if ( rolo_type_is( 'contact' ) ) 
+			{ 
+			?> <div id="contact"> <?php
+				$thumbid = get_post_thumbnail_id($post->ID);							
+				$thumb = wp_get_attachment_image_src($thumbid,'thumbnail');
+						
+				$srcimage =  $thumb[0];
+				if(isset($srcimage))
+					$style = "background:url(".$srcimage.") no-repeat;";
+				else
+					$style = "background: transparent no-repeat";		
+				$link = get_permalink();
+					
+			?>
+				<div class="photo" >
+					<a href="<?php echo $link;?>">
+					<span style="<?php echo $style;?>"></span>
+					</a>
+						<img src="<?php echo get_bloginfo('template_url').'/library/images/gold-frame.png';?>" alt="">		
+					<div class="title">
+						<?php the_title();?>
+				</div>
+				</div>
+				<?php 		
+		
+			    $contact = get_post_meta($post->ID, 'rolo_contact', true);
+
+			    if(isset($contact['rolo_contact_phone']))
+			    {
+			    	$skype_name =$contact['rolo_contact_phone'];
+								
+				?>
+					<div class="phone">
+						<script type="text/javascript" src="http://download.skype.com/share/skypebuttons/js/skypeCheck.js"></script>
+						<a href="skype: <?php echo $skype_name;?> ?call">
+						<img src="<?php echo get_bloginfo('template_url').'/library/images/Old-Phone.png';?>" style="border: none;" width="92" height="82" alt="Skype Me™!" /></a>
+					</div>			
 				<?php 
-					
-					if (is_archive() || is_home()) { 
-								if ( rolo_type_is( 'contact' ) ) { rolo_contact_header(get_the_ID());}
-								if ( rolo_type_is( 'company' ) ) { rolo_company_header(get_the_ID());} ?>
-					<?php }
-					
-					elseif (is_single() ) { 
-					
-								if ( rolo_type_is( 'contact' ) ) { rolo_contact_header(get_the_ID()); the_content();
-										if ( is_active_sidebar("contact-under-main")){ ?>
-											<div class="widget-area contact-under-main">
-											<?php dynamic_sidebar("contact-under-main"); ?>
-											</div> 
-										<?php }
-								}
-
-								if ( rolo_type_is( 'company' ) ) { rolo_company_header(get_the_ID()); the_content();
-										if ( is_active_sidebar("company-under-main")){ ?>
-											<div class="widget-area company-under-main">
-											<?php dynamic_sidebar("company-under-main"); ?>
-											</div> 
-										<?php }
-								}
-					}
-					
-					elseif (is_search() ) { ?>
-							<?php 					
-								if 
-									( rolo_type_is( 'contact' ) ) { rolo_contact_header(get_the_ID()); }
-								elseif
-									( rolo_type_is( 'company' ) ) { rolo_company_header(get_the_ID()); }
-								else { ?>
-											<li id="entry-<?php echo basename(get_permalink());?>" class="entry-header">
-												<?php echo '<img class="entry-icon" src=' . ROLOPRESS_IMAGES . '/icons/rolo-default.jpg />' ?>
-												<a class="entry-title" href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a>
-											</li>
-								<?php }
-					}
+				 }			
 									
-					elseif (is_page() ) {
-								the_content(); // show the page content
-								
-								if (is_page_template('widgets.php') || is_page_template('widgets-no-sidebar.php')) { // is this a widget page
-								
-									if ( is_active_sidebar("widget-page") ) { // is the widget area active ?>
-										<div class="widget-area">
-										<ul class="xoxo">
-										<?php dynamic_sidebar("widget-page");?>
-										</ul> 
-										</div><!-- #widget-area -->	
-										<?php }
-									else {
-										rolo_add_some_widgets_message(); // if not, show a message
-									}
-								}
-					}
-							
-					else { ?>
-								<li id="entry-<?php echo basename(get_permalink());?>" class="entry-header">
-									<?php echo '<img class="entry-icon" src=' . ROLOPRESS_IMAGES . '/icons/rolo-default.jpg />' ?>
-									<a class="entry-title" href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a>
-								</li>
+				the_content();
+			
+				}
+				
+			} //end if is single
 					
+			elseif (is_search() ) { ?>
+			<div id="contact">
+			<?php 					
+				if( rolo_type_is( 'contact' ) ) { rolo_contact_header(get_the_ID()); }
+				elseif( rolo_type_is( 'company' ) ) { rolo_company_header(get_the_ID()); }
+				else { ?>
+					<li id="entry-<?php echo basename(get_permalink());?>" class="entry-header">
+			<?php	echo '<img class="entry-icon" src=' . ROLOPRESS_IMAGES . '/icons/rolo-default.jpg />' ?>
+					<a class="entry-title" href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a>
+					</li>
+			<?php	 }
+					} // end if is search
+									
+			elseif (is_page() ) { 
+				?><div id="contact"><?php 
+				the_content(); // show the page content
+								
+				if (is_page_template('widgets.php') || is_page_template('widgets-no-sidebar.php')) { // is this a widget page
+								
+					if ( is_active_sidebar("widget-page") ) { // is the widget area active ?>
+						<div class="widget-area">
+						<ul class="xoxo">
+				<?php 		dynamic_sidebar("widget-page");?>
+						</ul> 
+						</div><!-- #widget-area -->	
+						<?php }
+					else {
+							rolo_add_some_widgets_message(); // if not, show a message
+						}
+					}
+				}// end if is page
+							
+				else { ?> 
+					<div id="contact">
+						<li id="entry-<?php echo basename(get_permalink());?>" class="entry-header">
+							<?php echo '<img class="entry-icon" src=' . ROLOPRESS_IMAGES . '/icons/rolo-default.jpg />' ?>
+							<a class="entry-title" href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a>
+						</li>				
 					<?php }; ?>
 					
-				</div><!-- .entry-main -->
+			<!-- 	</div> --><!-- .entry-main -->
 					
 				<?php rolo_entry_footer(); ?>
 
 				<?php rolopress_after_entry(); // After entry hook ?>
 				
-		</li><!-- #entry-<?php the_ID(); ?> -->
+		</div><!-- #entry-<?php the_ID(); ?> -->
 <?php endwhile; ?>
 
 <?php if (!is_single() ) { // not needed on single pages ?>
-	</ul><!-- item-list-->
+<!-- 	</ul> --><!-- item-list-->
 <?php }; ?>
 
 

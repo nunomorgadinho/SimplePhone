@@ -5,7 +5,7 @@
 	
 		<?php rolopress_before_main(); // Before main hook ?>
 		<div id="main">
-
+		
 				<?php rolo_pageheader();?>
 				<?php rolo_loop();?>
 			

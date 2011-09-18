@@ -6,14 +6,14 @@
 		<?php rolopress_before_main(); // Before main hook ?>
 		<div id="main">
 
-				<?php rolo_pageheader();?>
+				<?php //rolo_pageheader();?>
 				<?php rolo_loop();?>
-				<?php comments_template( '/notes.php' ); ?>
+				<?php //comments_template( '/notes.php' ); ?>
 			
 		</div><!-- #main -->
 		<?php rolopress_after_main(); // After main hook ?>
 	</div><!-- #container -->
 	<?php rolopress_after_container(); // After container hook ?>
 
-<?php get_sidebar(); ?>	
-<?php get_footer(); ?>
+<?php //get_sidebar(); ?>	
+<?php //get_footer(); ?>

@@ -48,6 +48,7 @@ function rolo_add_contact() {
  */
 function rolo_edit_contact() {
     $contact_id =  (isset($_GET['id'])) ? $_GET['id'] : 0;
+    $action = (isset($_GET['action'])) ? $_GET['action'] : '';
     $contact = &get_post($contact_id);
 
     if ($contact) {
@@ -63,7 +64,14 @@ function rolo_edit_contact() {
                 echo __("Ocorreu um erro ao editar o contacto", 'rolopress');
     //            TODO - Handle Error properly
             }
-        } else {
+        }
+        else if($action == 'delete')
+        {
+        	wp_delete_post($contact_id);
+        	echo __("Contacto removido com sucesso.", 'rolopress');
+        	
+        } 
+        else {
             _rolo_show_edit_contact_form($contact_id);
         }
     } else {
@@ -136,7 +144,7 @@ function _rolo_show_edit_contact_form($contact_id) {
    <div class="buttonHolder">
        <input type="hidden" name="contact_id" value="<?php echo $contact_id;?>" />
       <input type="hidden" name="rp_edit_contact" value="edit_contact" />
-      <button type="submit" name="submit" id="edit_contact" class="submitButton" tabindex="<?php echo $rolo_tab_index++;?>" ><?php _e('Edit Contact', 'rolopress');?></button>
+      <button type="submit" name="submit" id="edit_contact" class="submitButton" tabindex="<?php echo $rolo_tab_index++;?>" ><?php _e('Editar Contacto', 'rolopress');?></button>
    </div>
 </form>
 <?php
@@ -156,10 +164,111 @@ function _rolo_show_contact_fields() {
         <h3><?php _e('Mandatory fields are not filled.', 'rolopress');?></h3>
     </div>
 
-    <fieldset class="inlineLabels">
+	<div id="addContact">
+<!-- 	<div id="frameContainer" onmouseover="hover(this, event)" ondrop="drop(this, event)" ondragenter="return false" ondragover="return false"> -->
+		<div id="frameContainer">
+	<?php 
+	//dummy get gravatar image
+//	echo get_avatar ('',96, rolo_get_twitter_profile_image('', ROLOPRESS_IMAGES . "/icons/rolo-contact.jpg") );
+	
+	// Get one of the nine frames possible
+	$frame_number =  rand(1, 9);
+	$src = get_bloginfo('template_url').'/library/images/frames/frame'.$frame_number.'.png';
+	
+	?>
+	
+<!--
+ 	<div id="contact">		
+		<div class="photo" >
+			<div id="gotcha_is_great"></div>
+			<input type="hidden" id="attach_image" name="attach_image" value="ola"></input>
+			<img src="<?php echo $src;?>" alt="">		
+		</div>
+	</div>
+ -->	
+	<div id="areas">
+	<div class="droparea spot" data-width="460" data-height="345" data-type="jpg" data-crop="true" data-quality="60" data-folder="sample" data-something="stupid"></div>
+	<img src="" alt="face" /> 
+	</div>
 
+	<script src="http://simplephone.com/wp-content/themes/rolopress-core/library/js/droparea.js" type="text/javascript"></script>
+	<script>
+		jQuery('.droparea').droparea({'post' : 'http://simplephone.com/wp-content/themes/rolopress-core/library/includes/upload.php' });
+	</script>
+	
+	
+		
+	
+	
+	<script type="text/javascript">
+	/*	function drag(target, e) { 
+		    e.dataTransfer.setData('Text', target.id);
+		}
+
+		function handleReaderLoadEnd(evt) 
+		{
+		  var el = jQuery("#gotcha_is_great");		  
+		  var attach_image = jQuery("#attach_image");
+		  el.append('<span style="background: url(\' ' + evt.target.result + ' \') no-repeat;"></span>');
+
+		  alert(jQuery("#attach_image").value);
+
+			  jQuery("#attach_image").value = evt.target.result;
+			  alert(jQuery("#attach_image").value);
+		    //var img = document.getElementById("preview");
+			//img.src = evt.target.result;
+		}
+
+		function hover(target, evt)
+		{ 
+			//alert('hello');
+		}
+			
+		function drop(target, evt)
+		{ 
+			evt.stopPropagation();
+			evt.preventDefault();
+		 
+			var files = evt.dataTransfer.files;
+			var count = files.length; 
+		
+		    // Only call the handler if 1 or more files was dropped.
+			if (count > 0){
+				handleFiles(files) 
+			}
+		}
+		
+		function handleFiles(files)
+		{
+			
+			var file = files[0];
+		 	
+			//	document.getElementById("droplabel").innerHTML = "Processing " + file.name;
+		 
+			var reader = new FileReader();
+		 
+			// init the reader event handlers
+			reader.onloadend = handleReaderLoadEnd;
+		 
+			// begin the read operation
+			reader.readAsDataURL(file);
+		
+		}
+		*/
+	</script>
+	
+
+	
+
+
+
+	</div> <!-- end frameContainer -->
+	
+	<div id="fieldContainer">
+    <fieldset class="inlineLabels">
+  
 <?php
-	foreach($contact_fields as $contact_field) {
+	foreach($contact_fields as $contact_field) { 
 
         if (function_exists($contact_field['setup_function'])){
             call_user_func_array($contact_field['setup_function'], array($contact_field['name'], &$rolo_tab_index));
@@ -198,10 +307,13 @@ function _rolo_show_contact_fields() {
 	}
 ?>
     </fieldset>
+    </div>
+    </div> <!-- end addContact div -->
    <div class="buttonHolder">
       <input type="hidden" name="rp_add_contact" value="add_contact" />
       <button type="submit" name="submit" id="add_contact" class="submitButton" tabindex="<?php echo $rolo_tab_index++;?>" ><?php _e('Adicionar Contacto', 'rolopress');?></button>
    </div>
+   
 </form>
 <?php
 }
@@ -277,6 +389,10 @@ function _rolo_save_contact_fields() {
     } else {
 //        TODO - handle error
     }
+    
+    //handle pictures
+    print_r($_POST);
+    
     return $post_id;
 }
 
