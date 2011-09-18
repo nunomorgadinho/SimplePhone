@@ -655,7 +655,60 @@ ol.notelist li .comment-reply-link a {
 }
 
 .droparea { 
-	border:1px solid red;
+/*	border:1px solid red;*/
 	width:460px;
 	height:345px;
+}
+
+.frame1
+{
+	top: 32px !important;
+	left: 29px !important;	
+}
+
+.frame2
+{
+	top: 24px !important;
+	left: 26px !important;	
+}
+
+.frame3
+{
+	left: 26px !important;
+}
+
+.frame4
+{
+	top: 39px !important;
+	left: 44px !important;
+}
+
+.frame5
+{
+	top: 33px !important;
+	left: 38px !important;
+}
+
+.frame6
+{
+	top: 34px !important;
+	left: 36px !important;
+}
+
+.frame7
+{
+	top: 51px !important;
+	left: 53px !important;
+}
+
+.frame8
+{
+	top: 12px !important;
+	left: 14px !important;
+}
+
+.frame9
+{
+	top: 24px !important;
+	left: 24px !important;
 }

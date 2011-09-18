@@ -1,4 +1,4 @@
-(function( jQuery ){
+(function( $ ){
     var s;
     // Methods
     var m = {
@@ -17,7 +17,7 @@
         },
         upload: function(file, area){
             //area.empty();
-            var progress = jQuery('<div>',{
+            var progress = $('<div>',{
                 'class':'progress'
             });
             area.append(progress);
@@ -54,7 +54,7 @@
                 s.complete(r);
                 area.find('img').remove();
                 area.data('value',r.filename)
-                .append(jQuery('<img>',{'src': r.path + r.filename + '?' + Math.random()}));
+                .append($('<img>',{'src': r.path + r.filename + '?' + Math.random()}));
                 progress.addClass('uploaded');
                 progress.html(s.uploaded).fadeOut('slow');
             }, false);
@@ -75,7 +75,7 @@
             xhr.send(file);
         }
     };
-    jQuery.fn.droparea = function(o) {
+    $.fn.droparea = function(o) {
         // Settings
         s = {
             'init': m.init,
@@ -90,17 +90,17 @@
             'post'        : 'upload.php'
         };
         this.each(function(){
-            if(o) jQuery.extend(s, o);
-            var instructions = jQuery('<div>').appendTo(jQuery(this));
-            s.init(jQuery(this));            
-            if(!jQuery(this).data('value'))
+            if(o) $.extend(s, o);
+            var instructions = $('<div>').appendTo($(this));
+            s.init($(this));            
+            if(!$(this).data('value'))
                 instructions.addClass('instructions').html(s.instructions);
 
-            jQuery(this)
+            $(this)
             .bind({
                 dragleave: function (e) {
                     e.preventDefault();
-                    if(jQuery(this).data('value'))
+                    if($(this).data('value'))
                         instructions.removeClass().empty();
                     else
                         instructions.removeClass('over').html(s.instructions);
@@ -115,8 +115,8 @@
             });
             this.addEventListener("drop", function (e) {
                 e.preventDefault();
-                s.start(jQuery(this));
-                m.traverse(e.dataTransfer.files, jQuery(this));
+                s.start($(this));
+                m.traverse(e.dataTransfer.files, $(this));
                 instructions.removeClass().empty();
             },false);
         });

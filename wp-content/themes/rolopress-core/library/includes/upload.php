@@ -6,13 +6,11 @@ $maxsize = 1024; //Kb
 $types = Array('image/png', 'image/gif', 'image/jpeg');
 
 $headers = getallheaders();
-print_r($headers);
 
 // LOG
 $log = '=== ' . @date('Y-m-d H:i:s') . ' ===============================' . "\n"
         . 'HEADERS:' . print_r($headers, 1) . "\n";
-       
-$fp = fopen('/Users/aaires/Projects/simplephone.com/wp-content/uploads/log.txt', 'a');
+$fp = fopen('log.txt', 'a');
 fwrite($fp, $log);
 fclose($fp);
 
@@ -20,7 +18,6 @@ fclose($fp);
 $r = new stdClass();
 // Result content type
 header('content-type: application/json');
-
 
 // File size control
 if ($headers['x-file-size'] > ($maxsize * 1024)) {
@@ -31,25 +28,18 @@ $folder = $headers['x-param-folder'] ? $headers['x-param-folder'] . '/' : '';
 if ($folder && !is_dir($folder))
     mkdir($folder);
 
-      
-    
 // File type control
 if (in_array($headers['x-file-type'], $types)) {
     // Create an unique file name    
-    if (isset($headers['x-param-value'])) {
+    if ($headers['x-param-value']) {
         $filename = $folder . $headers['x-param-value'];
     } else {
         $filename = $folder . sha1(@date('U') . '-' . $headers['x-file-name'])
-                . '.' . $headers['x-file-type'];
+                . '.' . $headers['x-param-type'];
     }
-    
-   // echo $filename;
     // Uploaded file source
     $source = file_get_contents('php://input');
     // Image resize
-    
-  
-    
     imageresize($source, $filename,
             $headers['x-param-width'],
             $headers['x-param-height'],

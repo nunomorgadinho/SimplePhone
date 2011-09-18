@@ -175,92 +175,51 @@ function _rolo_show_contact_fields() {
 	$frame_number =  rand(1, 9);
 	$src = get_bloginfo('template_url').'/library/images/frames/frame'.$frame_number.'.png';
 	
-	?>
+	//list($w, $h) = getimagesize($src);
 	
-<!--
- 	<div id="contact">		
-		<div class="photo" >
-			<div id="gotcha_is_great"></div>
-			<input type="hidden" id="attach_image" name="attach_image" value="ola"></input>
-			<img src="<?php echo $src;?>" alt="">		
-		</div>
-	</div>
- -->	
-	<div id="areas">
-	<div class="droparea spot" data-width="460" data-height="345" data-type="jpg" data-crop="true" data-quality="60" data-folder="sample" data-something="stupid"></div>
-	<img src="" alt="face" /> 
-	</div>
+	 $sizes_custom = get_option('aisz_sizes');
+
+	 $w = $sizes_custom['frame'.$frame_number]['size_w'];
+	 $h = $sizes_custom['frame'.$frame_number]['size_h'];
+	
+	 //$style = "background:url(".$srcimage.") no-repeat;";
+	?>
+	 	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script>
+ 
+	<div id="contact">		
+			<div class="photo" >
+				<a href="<?php echo $link;?>">
+				<span class="droparea spot frame<?php echo $frame_number; ?>" data-width="<?php echo $w; ?>" data-height="<?php echo $h; ?>" data-type="jpg" data-crop="true" style="background: url('') no-repeat;"></span>
+				</a>
+					<img src="<?php echo $src; ?>" alt="">		
+				<div class="title">
+					<?php the_title();?>
+				</div>
+			</div>
+		</div>	<!-- close div contact -->
+
 
 	<script src="http://simplephone.com/wp-content/themes/rolopress-core/library/js/droparea.js" type="text/javascript"></script>
 	<script>
-		jQuery('.droparea').droparea({'post' : 'http://simplephone.com/wp-content/themes/rolopress-core/library/includes/upload.php' });
+		jQuery('.droparea').droparea({
+			'post' : 'http://simplephone.com/wp-content/themes/rolopress-core/library/includes/upload.php',
+            'init' : function(r){
+                //console.log('my init',r);
+            },
+            'start' : function(r){
+                //console.log('my start',r);
+            },
+            'error' : function(r){
+                //console.log('my error',r);
+            },
+            'complete' : function(r){
+                console.log('my complete',r);
+                jQuery("#filename").attr("value", r.filename);
+            }
+
+		});
 	</script>
-	
-	
-		
-	
-	
-	<script type="text/javascript">
-	/*	function drag(target, e) { 
-		    e.dataTransfer.setData('Text', target.id);
-		}
-
-		function handleReaderLoadEnd(evt) 
-		{
-		  var el = jQuery("#gotcha_is_great");		  
-		  var attach_image = jQuery("#attach_image");
-		  el.append('<span style="background: url(\' ' + evt.target.result + ' \') no-repeat;"></span>');
-
-		  alert(jQuery("#attach_image").value);
-
-			  jQuery("#attach_image").value = evt.target.result;
-			  alert(jQuery("#attach_image").value);
-		    //var img = document.getElementById("preview");
-			//img.src = evt.target.result;
-		}
-
-		function hover(target, evt)
-		{ 
-			//alert('hello');
-		}
-			
-		function drop(target, evt)
-		{ 
-			evt.stopPropagation();
-			evt.preventDefault();
-		 
-			var files = evt.dataTransfer.files;
-			var count = files.length; 
-		
-		    // Only call the handler if 1 or more files was dropped.
-			if (count > 0){
-				handleFiles(files) 
-			}
-		}
-		
-		function handleFiles(files)
-		{
-			
-			var file = files[0];
-		 	
-			//	document.getElementById("droplabel").innerHTML = "Processing " + file.name;
-		 
-			var reader = new FileReader();
-		 
-			// init the reader event handlers
-			reader.onloadend = handleReaderLoadEnd;
-		 
-			// begin the read operation
-			reader.readAsDataURL(file);
-		
-		}
-		*/
-	</script>
-	
-
-	
-
-
 
 	</div> <!-- end frameContainer -->
 	
@@ -310,6 +269,8 @@ function _rolo_show_contact_fields() {
     </div>
     </div> <!-- end addContact div -->
    <div class="buttonHolder">
+      <input type="text" id="framename" name="framename" value="frame<?php echo $frame_number; ?>" />
+   	  <input type="text" id="filename" name="filename" value="" />
       <input type="hidden" name="rp_add_contact" value="add_contact" />
       <button type="submit" name="submit" id="add_contact" class="submitButton" tabindex="<?php echo $rolo_tab_index++;?>" ><?php _e('Adicionar Contacto', 'rolopress');?></button>
    </div>
@@ -383,6 +344,49 @@ function _rolo_save_contact_fields() {
 
         // store the array as post meta
         update_post_meta($post_id, 'rolo_contact' , $new_contact);
+        
+        // photo
+        update_post_meta($post_id, 'rolo_contact_filename' , $_POST['filename']);
+        
+        // ------------------------------------------
+        
+        // como ja fizemos o upload por ajax agora basta ir buscar as imagens ah directoria temp
+		$upload = wp_upload_bits($_POST['filename'], null, file_get_contents(ABSPATH."wp-content/themes/rolopress-core/library/includes/".$_POST['filename']));
+
+		print_r($upload);
+		
+	    $type = '';
+	    if ( !empty($upload['type']) )
+	        $type = $upload['type'];
+	    else {
+	        $mime = wp_check_filetype( $upload['file'] );
+	        if ($mime)
+	          $type = $mime['type'];
+	    }
+	     	    
+	   $attachment = array(
+	            'post_title' => basename( $upload['file'] ),
+	            'post_content' => '',
+	            'post_type' => 'attachment',
+	            'post_parent' => $post_id,
+	            'post_mime_type' => $type,
+	            'guid' => $upload[ 'url' ],
+	   	);
+	
+	   	require_once("wp-admin/includes/image.php");
+
+	   	// Save the data
+	   	$id = wp_insert_attachment( $attachment, $upload[ 'file' ], $post_id );
+
+	   	wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $upload[ 'file' ] ) );
+	   	
+   		// Set as featured
+		set_featured_foto($post_id, $id);
+
+        // ------------------------------------------
+        
+        // frame
+        update_post_meta($post_id, 'rolo_contact_framename' , $_POST['framename']);
 
         // Set the custom taxonmy for the post
         wp_set_post_terms($post_id, 'Contact', 'type');
@@ -391,9 +395,15 @@ function _rolo_save_contact_fields() {
     }
     
     //handle pictures
-    print_r($_POST);
+   // print_r($_POST);
     
     return $post_id;
+}
+
+// added by nuno
+function set_featured_foto($post_id, $att_id)
+{
+	update_post_meta($post_id, '_thumbnail_id', $att_id); 	
 }
 
 /**

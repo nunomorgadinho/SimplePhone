@@ -333,8 +333,9 @@ function rolo_loop() { ?>
 		if ( (is_archive() || is_home())) 
 		{
 				
-			$thumbid = get_post_thumbnail_id($post->ID);							
-			$thumb = wp_get_attachment_image_src($thumbid,'thumbnail');
+			$thumbid = get_post_thumbnail_id($post->ID);		
+			$frame_number = get_post_meta($post->ID, 'rolo_contact_framename', true);					
+			$thumb = wp_get_attachment_image_src($thumbid, $frame_number); // <------- NAO ESTA A FUNCIONAR
 					
 			$srcimage =  $thumb[0];
 			if(isset($srcimage))
@@ -349,7 +350,7 @@ function rolo_loop() { ?>
 				<a href="<?php echo $link;?>">
 				<span style="<?php echo $style;?>"></span>
 				</a>
-					<img src="<?php echo get_bloginfo('template_url').'/library/images/gold-frame.png';?>" alt="">		
+					<img src="<?php echo get_bloginfo('template_url').'/library/images/frames/'.$frame_number.'.png';?>" alt="">		
 				<div class="title">
 					<?php the_title();?>
 				</div>
