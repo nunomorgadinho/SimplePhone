@@ -99,6 +99,65 @@ function _rolo_show_edit_contact_form($contact_id) {
         <h3><?php _e('Campos obrigatórios não estão preenchidos.', 'rolopress');?></h3>
     </div>
 
+<div id="addContact">
+		<div id="frameContainer">
+	<?php 	
+	// Get one of the nine frames possible
+	$frame_number = get_post_meta($contact_id, 'rolo_contact_framename', true);
+	
+	global $_wp_additional_image_sizes;
+	
+	 $w = $_wp_additional_image_sizes[$frame_number]['width'];
+	 $h = $_wp_additional_image_sizes[$frame_number]['height'];
+	?>
+	 	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script>
+ 
+	<div id="contact">		
+			<div class="photo" id="<?php echo $frame_number;?>">
+				<a href="<?php echo $link;?>">
+				
+				<span class="droparea spot <?php echo $frame_number; ?>" data-width="<?php echo $w; ?>" data-height="<?php echo $h; ?>" data-type="jpg" data-crop="true" style="background: url('') no-repeat;"></span>
+
+				<span class="<?php echo $frame_number; ?>" style="z-index: -100;">
+				<?php echo get_the_post_thumbnail( $contact_id, $frame_number ); // AQUI É ONDE É POSTA A FOTO ?>
+				</span>
+				
+				</a>
+					<img src="<?php echo get_bloginfo('template_url').'/library/images/frames/'.$frame_number.'.png';?>" alt="">		
+				<div class="title">
+					<?php the_title();?>
+				</div>
+			</div>
+		</div>	<!-- close div contact -->
+
+
+	<script src="http://simplephone.com/wp-content/themes/rolopress-core/library/js/droparea.js" type="text/javascript"></script>
+	<script>
+		jQuery('.droparea').droparea({
+			'post' : 'http://simplephone.com/wp-content/themes/rolopress-core/library/includes/upload.php',
+            'init' : function(r){
+                //console.log('my init',r);
+            },
+            'start' : function(r){
+                //console.log('my start',r);
+            },
+            'error' : function(r){
+                //console.log('my error',r);
+            },
+            'complete' : function(r){
+                console.log('my complete',r);
+                jQuery("#filename").attr("value", r.filename);
+            }
+
+		});
+	</script>
+
+	</div> <!-- end frameContainer -->
+
+
+
+	<div id="fieldContainer">
     <fieldset class="inlineLabels">
 
 <?php
@@ -118,13 +177,13 @@ function _rolo_show_edit_contact_form($contact_id) {
             }
 ?>
         <div class="ctrlHolder <?php echo $contact_field['class']; echo $mandatory_class; ?>">
-            <label for="<?php echo $name;?>">
+            <li><label for="<?php echo $name;?>">
 <?php
                     if ($contact_field['mandatory'] == true) {
                         echo '<em>*</em>';
                     }
                     echo $contact_field['title'];?>
-			</label>
+			</label></li>
 			
 <?php					
 					if (isset($contact_field['prefix']) == true) {		
@@ -133,7 +192,7 @@ function _rolo_show_edit_contact_form($contact_id) {
                     }
 ?>
 
-            <input type="text" name="<?php echo $name;?>" value="<?php echo $current_value ;?>" size="55" tabindex="<?php echo $rolo_tab_index;?>" class="textInput <?php echo $class;?>" />
+          <li>  <input type="text" name="<?php echo $name;?>" value="<?php echo $current_value ;?>" size="55" tabindex="<?php echo $rolo_tab_index;?>" class="textInput <?php echo $class;?>" /></li>
         </div>
 <?php
             $rolo_tab_index++;
@@ -141,8 +200,11 @@ function _rolo_show_edit_contact_form($contact_id) {
 	}
 ?>
     </fieldset>
+    </div>
    <div class="buttonHolder">
-       <input type="hidden" name="contact_id" value="<?php echo $contact_id;?>" />
+      <input type="hidden" name="contact_id" value="<?php echo $contact_id;?>" />
+      <input type="hidden" id="framename" name="framename" value="<?php echo $frame_number; ?>" />
+   	  <input type="hidden" id="filename" name="filename" value="" />
       <input type="hidden" name="rp_edit_contact" value="edit_contact" />
       <button type="submit" name="submit" id="edit_contact" class="submitButton" tabindex="<?php echo $rolo_tab_index++;?>" ><?php _e('Editar Contacto', 'rolopress');?></button>
    </div>
