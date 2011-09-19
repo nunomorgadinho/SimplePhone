@@ -109,6 +109,7 @@ function _rolo_show_edit_contact_form($contact_id) {
         } else {
 
             $name = 'rolo_contact_' . $contact_field['name'];
+           
             $current_value = $contact[$name];
             $class = $contact_field['class'];
 

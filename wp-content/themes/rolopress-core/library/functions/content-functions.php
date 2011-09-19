@@ -375,29 +375,27 @@ function rolo_loop() { ?>
 		{  
 			if ( rolo_type_is( 'contact' ) ) 
 			{ 
-			?> <div id="contact-single"> <?php
-		/*		$thumbid = get_post_thumbnail_id($post->ID);							
-				$thumb = wp_get_attachment_image_src($thumbid,'thumbnail');
-						
-				$srcimage =  $thumb[0];
-				if(isset($srcimage))
-					$style = "background:url(".$srcimage.") no-repeat;";
-				else
-					$style = "background: transparent no-repeat";		
-				$link = get_permalink();*/
-					
-			?>
+				
+				
+				
+			?> 
+			<h2 class="title"><?php the_title();?></h2>
+				<div id="contact-single" style="width: 940px;"> 
+				
+				<div class="left">
+				<div style="float:right;">
 				<div class="photo" id="<?php echo 'frame'.$frame_number;?>">
+				
 					<a href="<?php echo $link;?>">
 					<span class="<?php echo $frame_number; ?>" style="background: url('') no-repeat;">
 						<?php the_post_thumbnail($frame_number); // AQUI É ONDE É POSTA A FOTO ?>
 					</span>
 					</a>
 						<img src="<?php echo get_bloginfo('template_url').'/library/images/frames/'.$frame_number.'.png';?>" alt="">		
-					<div class="title">
-						<?php the_title();?>
-					</div>
+				</div>	
 				</div>
+				</div>
+				
 				<?php 		
 		
 			    $contact = get_post_meta($post->ID, 'rolo_contact', true);
@@ -407,11 +405,39 @@ function rolo_loop() { ?>
 			    	$skype_name =$contact['rolo_contact_phone'];
 								
 				?>
+					<div class="right">
 					<div class="phone">
 						<script type="text/javascript" src="http://download.skype.com/share/skypebuttons/js/skypeCheck.js"></script>
 						<a href="skype: <?php echo $skype_name;?> ?call">
 						<img src="<?php echo get_bloginfo('template_url').'/library/images/Old-Phone.png';?>" style="border: none;" width="92" height="82" alt="Skype Me™!" /></a>
-					</div>			
+					</div>	
+					
+					<div>
+						<?php 
+							 $contact = get_post_meta($post->ID, 'rolo_contact');
+    						 $contact = $contact[0];
+    						 $address = $contact['rolo_contact_address'];
+    						 
+    						$city = rolo_get_term_list($contact_id, 'city');
+    					    $state = rolo_get_term_list($contact_id, 'state');
+   						    $zip = rolo_get_term_list($contact_id, 'zip');
+        					$country = rolo_get_term_list($contact_id, 'country');
+
+					        $city = ($city == '') ? 'Cidade' : $city;
+					     //   $state = ($state == '') ? 'State' : $state;
+					        $zip = ($zip == '') ? 'Código Postal' : $zip;
+					        $country = ($country == '') ? 'País' : $country;
+    						 
+    						 
+    						if(isset($address)){
+    							echo "Morada:<br/>";
+    							echo $address.' '.$zip.' '.$city.' '.$country;
+    						}
+						?>
+					
+					</div>
+						
+					</div>	
 				<?php 
 				 }			
 									

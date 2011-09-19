@@ -23,3 +23,17 @@
 
 <?php //get_sidebar(); ?>	
 <?php //get_footer(); ?>
+
+<script src="http://masonry.desandro.com/js/jquery-1.6.2.min.js"></script> 
+<script src="http://masonry.desandro.com/jquery.masonry.min.js"></script> 
+<script> 
+  jQuery(function(){
+    
+    jQuery('#container').masonry({
+      itemSelector: '.photo',
+      columnWidth: 100,
+      isAnimated: true
+    });
+    
+  });
+</script> 
