@@ -177,10 +177,12 @@ function _rolo_show_contact_fields() {
 	
 	//list($w, $h) = getimagesize($src);
 	
-	 $sizes_custom = get_option('aisz_sizes');
+	// $sizes_custom = get_option('aisz_sizes');
 
-	 $w = $sizes_custom['frame'.$frame_number]['size_w'];
-	 $h = $sizes_custom['frame'.$frame_number]['size_h'];
+	global $_wp_additional_image_sizes;
+	
+	 $w = $_wp_additional_image_sizes['frame'.$frame_number]['width'];
+	 $h = $_wp_additional_image_sizes['frame'.$frame_number]['height'];
 	
 	 //$style = "background:url(".$srcimage.") no-repeat;";
 	?>

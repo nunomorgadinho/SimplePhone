@@ -336,7 +336,7 @@ function rolo_loop() { ?>
 			$thumbid = get_post_thumbnail_id($post->ID);		
 			$frame_number = get_post_meta($post->ID, 'rolo_contact_framename', true);					
 			$thumb = wp_get_attachment_image_src($thumbid, $frame_number); // <------- NAO ESTA A FUNCIONAR
-					
+		
 			$srcimage =  $thumb[0];
 			if(isset($srcimage))
 				$style = "background:url(".$srcimage.") no-repeat;";
@@ -348,14 +348,19 @@ function rolo_loop() { ?>
 		<div id="contact">		
 			<div class="photo" >
 				<a href="<?php echo $link;?>">
-				<span style="<?php echo $style;?>"></span>
+				<span class="<?php echo $frame_number; ?>" style="background: url('') no-repeat;">
+				
+				<?php the_post_thumbnail($frame_number); // AQUI É ONDE É POSTA A FOTO ?>
+				
+				</span>
 				</a>
-					<img src="<?php echo get_bloginfo('template_url').'/library/images/frames/'.$frame_number.'.png';?>" alt="">		
+				    <img src="<?php echo get_bloginfo('template_url').'/library/images/frames/'.$frame_number.'.png';?>" alt="">		
 				<div class="title">
 					<?php the_title();?>
 				</div>
 			</div>
 		</div>	<!-- close div contact -->
+		
 			<?php 
 			continue;
 			}
