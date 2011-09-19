@@ -190,14 +190,12 @@ function _rolo_show_contact_fields() {
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script>
  
 	<div id="contact">		
-			<div class="photo" >
+			<div class="photo" id="<?php echo 'frame'.$frame_number;?>">
 				<a href="<?php echo $link;?>">
 				<span class="droparea spot frame<?php echo $frame_number; ?>" data-width="<?php echo $w; ?>" data-height="<?php echo $h; ?>" data-type="jpg" data-crop="true" style="background: url('') no-repeat;"></span>
 				</a>
 					<img src="<?php echo $src; ?>" alt="">		
-				<div class="title">
-					<?php the_title();?>
-				</div>
+				
 			</div>
 		</div>	<!-- close div contact -->
 
@@ -207,13 +205,13 @@ function _rolo_show_contact_fields() {
 		jQuery('.droparea').droparea({
 			'post' : 'http://simplephone.com/wp-content/themes/rolopress-core/library/includes/upload.php',
             'init' : function(r){
-                //console.log('my init',r);
+                
             },
             'start' : function(r){
-                //console.log('my start',r);
+              
             },
             'error' : function(r){
-                //console.log('my error',r);
+                
             },
             'complete' : function(r){
                 console.log('my complete',r);
@@ -225,7 +223,14 @@ function _rolo_show_contact_fields() {
 
 	</div> <!-- end frameContainer -->
 	
+	
+	
+	
 	<div id="fieldContainer">
+    
+    
+    
+    
     <fieldset class="inlineLabels">
   
 <?php
@@ -244,14 +249,16 @@ function _rolo_show_contact_fields() {
                 $mandatory_class = ' mandatory';
             }
 ?>
-		<div class="ctrlHolder <?php echo $contact_field['class']; echo $mandatory_class; ?>">
-            <label for="<?php echo $name;?>">
+		<div class="ctrlHolder <?php echo $contact_field['class']; ?>">
+           <li>
+            <label for="<?php echo $name;?>" class="<?php echo $mandatory_class;?>">
 <?php
                     if ($contact_field['mandatory'] == true) {
                         echo '<em>*</em>';
                     }
                     echo $contact_field['title'];?>
 			</label>
+			</li>		
 			
 <?php
 					if (isset($contact_field['prefix']) == true) {
@@ -259,8 +266,9 @@ function _rolo_show_contact_fields() {
 						$class = $contact_field['class'] . " " . "input-prefix";
                     }
 ?>
-
+			<li>
             <input type="text" name="<?php echo $name;?>" value="<?php echo $default_value ;?>" size="55" tabindex="<?php echo $rolo_tab_index;?>" class="textInput <?php echo $class;?>" />
+        	</li>
         </div>
 <?php
             $rolo_tab_index++;
@@ -268,14 +276,15 @@ function _rolo_show_contact_fields() {
 	}
 ?>
     </fieldset>
-    </div>
-    </div> <!-- end addContact div -->
-   <div class="buttonHolder">
-      <input type="text" id="framename" name="framename" value="frame<?php echo $frame_number; ?>" />
-   	  <input type="text" id="filename" name="filename" value="" />
+       <div class="buttonHolder">
+      <input type="hidden" id="framename" name="framename" value="frame<?php echo $frame_number; ?>" />
+   	  <input type="hidden" id="filename" name="filename" value="" />
       <input type="hidden" name="rp_add_contact" value="add_contact" />
       <button type="submit" name="submit" id="add_contact" class="submitButton" tabindex="<?php echo $rolo_tab_index++;?>" ><?php _e('Adicionar Contacto', 'rolopress');?></button>
    </div>
+    
+    </div> <!-- end field container -->
+    </div> <!-- end addContact div -->
    
 </form>
 <?php
@@ -355,7 +364,7 @@ function _rolo_save_contact_fields() {
         // como ja fizemos o upload por ajax agora basta ir buscar as imagens ah directoria temp
 		$upload = wp_upload_bits($_POST['filename'], null, file_get_contents(ABSPATH."wp-content/themes/rolopress-core/library/includes/".$_POST['filename']));
 
-		print_r($upload);
+	//	print_r($upload);
 		
 	    $type = '';
 	    if ( !empty($upload['type']) )
@@ -465,6 +474,7 @@ function rolo_setup_contact_address($field_name, &$rolo_tab_index, $contact_id =
     }
 ?>
         <div class="ctrlHolder">
+        <li>
             <label for="rolo_contact_address">
 <?php
                 if ($address_field['mandatory'] == true) {
@@ -473,7 +483,10 @@ function rolo_setup_contact_address($field_name, &$rolo_tab_index, $contact_id =
                 echo $address_field['title'];
 ?>
             </label>
+           </li>
+           <li>
             <textarea rows="3" cols="20" name ="rolo_contact_address" tabindex="<?php echo $rolo_tab_index++;?>" class="textArea address" ><?php echo $current_value;?></textarea>
+           </li>
         </div>
 
 <?php

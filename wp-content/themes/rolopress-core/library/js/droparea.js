@@ -81,10 +81,10 @@
             'init': m.init,
             'start': m.start,
             'complete': m.complete,
-            'instructions': 'drop an image file here',
-            'over'        : 'drop file here!',
+            'instructions': 'Arraste imagem para <br/>dentro da molduta!',
+            'over'        : 'Largue imagem aqui!',
             'nosupport'   : 'No support for the File API in this web browser',
-            'noimage'     : 'Unsupported file type!',
+            'noimage'     : 'Tipo de ficheiro não suportado!',
             'uploaded'    : 'Uploaded',
             'maxsize'     : '500', //Kb
             'post'        : 'upload.php'

@@ -74,7 +74,7 @@
 .inlineLabels .ctrlHolder{
 }
 .inlineLabels label,.inlineLabels .label{
-    float:left;
+   /* float:left;*/
     padding:0 1% 0 0;
     line-height:100%;
     /* user prefs */
@@ -86,7 +86,8 @@
     float:left;
     /* user prefs */
     width:65%;
-    border:2px solid #dfdfdf;
+    border:2px solid #fff;
+    background:#dfdfdf;
 }
 .inlineLabels .multipleInput .textInput {
     width:30%;
@@ -99,21 +100,32 @@
 }
 
 .inlineLabels .city {
-    margin-left:31%;
+  /*  margin-left:31%;*/
     margin-right:2%;
     width:32%;
+    font-size:15px;
 }
 .inlineLabels .state {
     width:10%;
     margin-right: 2%;
 }
 .inlineLabels .zip {
-    width:18%;
+    width:31%;
+    font-size:15px;
+    
 }
 .inlineLabels .country {
-    margin-left:31%;
+   /* margin-left:31%;*/
     width:65%;
+    font-size:15px;
+    
 }
+
+.inlineLabels .ctrlHolder{
+	/* margin-left:10%;*/
+	left:15px;
+}
+
 .inlineLabels .fileUpload > input{
 }
 
@@ -128,8 +140,8 @@
     float:left;
     width:65%;
     /* user prefs */
-    border:2px solid #dfdfdf;
-    background: #FFFFFF;
+    border:2px solid #fff;
+    background: #dfdfdf;
     padding: 0;
 }
 .prefix {
@@ -245,8 +257,8 @@ div.focused .formHint{
 
 /* Required asterisk styling, use if needed */
 label em, .label em{
-    display:block;
-    float:right;
+/*    display:block;
+    float:right;*/
     font-style:normal;
     font-weight:bold;
     left:0;

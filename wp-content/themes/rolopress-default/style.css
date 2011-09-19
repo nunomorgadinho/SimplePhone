@@ -17,10 +17,24 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 
+
+
+@font-face {
+    font-family: 'EnglandHandDBRegular';
+    src: url('fonts/england-webfont.eot');
+    src: url('fonts/england-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/england-webfont.woff') format('woff'),
+         url('fonts/england-webfont.ttf') format('truetype'),
+         url('fonts/england-webfont.svg#EnglandHandDBRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 body, html {
     margin: 0;
     padding:0;
-    font-family:"Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;
+    font-family:"EnglandHandDBRegular, Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif !important;
 }
 #wrapper {
     clear: both;
@@ -96,12 +110,12 @@ a:hover {
 }
 
 #menu .menu-item a {
-    padding:10px 15px 0 0;
+    padding:7px 15px 0 0;
 }
 
 #menu .home a{
-    font-family: Georgia,"Times New Roman","Bitstream Charter",Times,serif;
-    font-size: 22px;
+    font-family: EnglandHandDBRegular, Georgia,"Times New Roman","Bitstream Charter",Times,serif;
+    font-size: 30px;
     padding:0 15px 0 0;
     text-decoration: none;
     color: white;
@@ -132,6 +146,7 @@ a:hover {
     -khtml-border-radius: 6px;
     -moz-border-radius: 6px;
     border-radius: 6px;
+    font-size:20px;
 }
 .post .entry-meta {
     text-align:right;
@@ -236,7 +251,7 @@ ul.item-list {
 h2.page-title, h3.section-title{
  /*   background:#E4F2FD;*/
 /*    text-shadow:0 1px 0 #FFFFFF;*/
-    font-weight:bold;
+    font-size:bold;
     line-height:1;
     margin:0;
     padding:7px 4px;
@@ -244,10 +259,12 @@ h2.page-title, h3.section-title{
 h2.page-title, h2.page-title a{
     text-decoration:none;
     font-size:16px;
-}
+	}
 h3.section-title{
     font-size:12px;
 }
+
+h2{font-size:45px !important;}
 
 
 /* =Alignment
@@ -599,10 +616,11 @@ ol.notelist li .comment-reply-link a {
 #reg_passmail {display:none;}
 
 .photo {
-	margin:30px;
+/*	margin:30px;*/
 	position:relative;
-	width:180px;
-	height:130px;
+/*	width:180px;
+	height:130px;*/
+	overflow: hidden;
 }
 
 .photo span {
@@ -615,12 +633,19 @@ ol.notelist li .comment-reply-link a {
 }
 
 #contact{
-	width:216px;
-	float:left;
+	/*width:216px;*/
+	float:right;
 	display:inline;
-	margin-left:30px;
+	/*margin-left:30px;*/
 	margin-top:20px;
 }
+
+#contact-list, #contact-single{
+	float:left;
+	display:inline;
+	margin-top:20px;
+}
+
 
 .title{
 	width:216px;
@@ -628,12 +653,13 @@ ol.notelist li .comment-reply-link a {
 	margin-left:auto;
 	margin-right:auto;
 	text-align:center;
+	font-size:25px;
 	}
 	
 	
 #addContact{width:100%}
-#frameContainer{width:30%;float:left;}
-#fieldContainer{width:70%; float:right; margin-top:50px;}
+#frameContainer{width:425px;float:left;}
+#fieldContainer{width:450px; float:right; }
 
 
 #dropbox {
@@ -646,7 +672,7 @@ ol.notelist li .comment-reply-link a {
 	text-align: center;
 	color: #BBB;
 	font-size: 2em;
-	font-family: Arial, sans-serif;
+	font-family: EnglandHandDBRegular,Arial, sans-serif;
 }
  
 #droplabel {
@@ -660,6 +686,7 @@ ol.notelist li .comment-reply-link a {
 	height:345px;
 }
 
+/*Sizes for images inside frame*/
 .frame1
 {
 	top: 32px !important;
@@ -711,4 +738,80 @@ ol.notelist li .comment-reply-link a {
 {
 	top: 24px !important;
 	left: 24px !important;
+}
+
+/*Actual size of the frame*/
+#frame1
+{
+	width: 237px !important;
+	height: 301px !important;	
+}
+
+#frame2
+{
+	width: 210px !important;
+	height: 241px !important;	
+}
+
+#frame3
+{
+	width: 185px !important;
+	height: 162px !important;	
+
+}
+
+#frame4
+{
+	width: 311px !important;
+	height: 269px !important;	
+
+}
+
+#frame5
+{
+	width: 256px !important;
+	height: 285px !important;	
+
+}
+
+#frame6
+{
+	width: 345px !important;
+	height: 277px !important;	
+
+}
+
+#frame7
+{
+	width: 373px !important;
+	height: 475px !important;	
+
+}
+
+#frame8
+{
+	width: 213px !important;
+	height: 156px !important;	
+
+}
+
+#frame9
+{
+	width: 421px !important;
+	height: 280px !important;	
+
+}
+
+input{font-family:EnglandHandDBRegular !important;}
+.submitButton {float:left; margin-left:30%; font-family:EnglandHandDBRegular;font-size:20px;}
+.instructions{margin-top:25px; margin-right:3px; margin-left:3px; font-size:15px;}
+
+#container, #menu{font-family:EnglandHandDBRegular;}
+#menu{font-size:25px;}
+label {font-size:25px !important;}
+
+
+body, input, textarea {
+font: 20px EnglandHandDBRegular, Arial,sans-serif;
+
 }

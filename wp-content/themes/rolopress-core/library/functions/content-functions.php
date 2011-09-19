@@ -330,10 +330,7 @@ function rolo_loop() { ?>
 		if($current_user_id != $author_id)
 			continue;
 
-		if ( (is_archive() || is_home())) 
-		{
-				
-			$thumbid = get_post_thumbnail_id($post->ID);		
+		$thumbid = get_post_thumbnail_id($post->ID);		
 			$frame_number = get_post_meta($post->ID, 'rolo_contact_framename', true);					
 			$thumb = wp_get_attachment_image_src($thumbid, $frame_number); // <------- NAO ESTA A FUNCIONAR
 		
@@ -343,10 +340,18 @@ function rolo_loop() { ?>
 			else
 				$style = "background: transparent no-repeat";		
 			$link = get_permalink();
+
+			global $_wp_additional_image_sizes;
+	
+			$w = $_wp_additional_image_sizes['frame'.$frame_number]['width'];
+			$h = $_wp_additional_image_sizes['frame'.$frame_number]['height'];
+			
+		if ( (is_archive() || is_home())) 
+		{
 				
 		?>
-		<div id="contact">		
-			<div class="photo" >
+		<div id="contact-list">		
+			<div class="photo" id="<?php echo 'frame'.$frame_number;?>">
 				<a href="<?php echo $link;?>">
 				<span class="<?php echo $frame_number; ?>" style="background: url('') no-repeat;">
 				
@@ -370,8 +375,8 @@ function rolo_loop() { ?>
 		{  
 			if ( rolo_type_is( 'contact' ) ) 
 			{ 
-			?> <div id="contact"> <?php
-				$thumbid = get_post_thumbnail_id($post->ID);							
+			?> <div id="contact-single"> <?php
+		/*		$thumbid = get_post_thumbnail_id($post->ID);							
 				$thumb = wp_get_attachment_image_src($thumbid,'thumbnail');
 						
 				$srcimage =  $thumb[0];
@@ -379,17 +384,19 @@ function rolo_loop() { ?>
 					$style = "background:url(".$srcimage.") no-repeat;";
 				else
 					$style = "background: transparent no-repeat";		
-				$link = get_permalink();
+				$link = get_permalink();*/
 					
 			?>
-				<div class="photo" >
+				<div class="photo" id="<?php echo 'frame'.$frame_number;?>">
 					<a href="<?php echo $link;?>">
-					<span style="<?php echo $style;?>"></span>
+					<span class="<?php echo $frame_number; ?>" style="background: url('') no-repeat;">
+						<?php the_post_thumbnail($frame_number); // AQUI É ONDE É POSTA A FOTO ?>
+					</span>
 					</a>
-						<img src="<?php echo get_bloginfo('template_url').'/library/images/gold-frame.png';?>" alt="">		
+						<img src="<?php echo get_bloginfo('template_url').'/library/images/frames/'.$frame_number.'.png';?>" alt="">		
 					<div class="title">
 						<?php the_title();?>
-				</div>
+					</div>
 				</div>
 				<?php 		
 		

@@ -24,19 +24,19 @@ if ($headers['x-file-size'] > ($maxsize * 1024)) {
     $r->error = "Max file size: $maxsize Kb";
 }
 
-$folder = $headers['x-param-folder'] ? $headers['x-param-folder'] . '/' : '';
+$folder =''; //$headers['x-param-folder'] ? $headers['x-param-folder'] . '/' : '';
 if ($folder && !is_dir($folder))
     mkdir($folder);
 
 // File type control
 if (in_array($headers['x-file-type'], $types)) {
     // Create an unique file name    
-    if ($headers['x-param-value']) {
-        $filename = $folder . $headers['x-param-value'];
-    } else {
+ //   if ($headers['x-param-value']) {
+ //       $filename = $folder . $headers['x-param-value'];
+ //   } else {
         $filename = $folder . sha1(@date('U') . '-' . $headers['x-file-name'])
                 . '.' . $headers['x-param-type'];
-    }
+//    }
     // Uploaded file source
     $source = file_get_contents('php://input');
     // Image resize
@@ -44,7 +44,7 @@ if (in_array($headers['x-file-type'], $types)) {
             $headers['x-param-width'],
             $headers['x-param-height'],
             $headers['x-param-crop'],
-            $headers['x-param-quality']);
+            60);
 } else
     $r->error = "Unsupported file type: " . $headers['x-file-type'];
 

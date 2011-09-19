@@ -86,7 +86,7 @@ array
     'class' => 'phone',
     'filter' => "rolo_contact_phone_",
     'default_value' => '',
-    'title' => __('Telefone (skype)','rolopress'),
+    'title' => __('Skype','rolopress'),
     'description' => '',
     'setup_function' => '',
     'save_function' => '',

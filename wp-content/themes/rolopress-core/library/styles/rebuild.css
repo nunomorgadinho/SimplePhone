@@ -13,7 +13,7 @@ body {
 }
 body, input, textarea {
     color: #111;
-    font: 12px Arial,sans-serif;
+    font: 12px EnglandHandDBRegular, Arial,sans-serif;
     line-height: 1.5;
 }
 
@@ -93,12 +93,12 @@ blockquote em, blockquote i, blockquote cite {
     font-style: normal;
 }
 pre {
-    font: 11px Monaco, monospace;
+    font: 11px EnglandHandDBRegular,Monaco, monospace;
     line-height: 1.5;
     margin-bottom: 1.5em;
 }
 code {
-    font: 11px Monaco, monospace;
+    font: 11px EnglandHandDBRegular,Monaco, monospace;
 }
 abbr, acronym {
     border-bottom: 1px dotted #666;
