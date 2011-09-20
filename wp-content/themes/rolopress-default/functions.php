@@ -8,7 +8,7 @@
 if(!is_admin())
 	{
 	   wp_deregister_script( 'jquery' );
-	  echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>';
+	//  echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>';
 	}
 
 add_filter( 'show_admin_bar', '__return_false' );	
