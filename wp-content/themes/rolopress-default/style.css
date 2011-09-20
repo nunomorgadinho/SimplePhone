@@ -28,13 +28,25 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
          url('fonts/england-webfont.svg#EnglandHandDBRegular') format('svg');
     font-weight: normal;
     font-style: normal;
+}
+
+@font-face {
+    font-family: 'BenthamRegular';
+    src: url('fonts/bentham-webfont.eot');
+    src: url('fonts/bentham-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/bentham-webfont.woff') format('woff'),
+         url('fonts/bentham-webfont.ttf') format('truetype'),
+         url('fonts/bentham-webfont.svg#BenthamRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
 
 }
+
 
 body, html {
     margin: 0;
     padding:0;
-    font-family:"EnglandHandDBRegular, Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif !important;
+    font-family:"BenthamRegular, Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif !important;
 }
 #wrapper {
     clear: both;
@@ -114,7 +126,7 @@ a:hover {
 }
 
 #menu .home a{
-    font-family: EnglandHandDBRegular, Georgia,"Times New Roman","Bitstream Charter",Times,serif;
+    font-family: BenthamRegular, Georgia,"Times New Roman","Bitstream Charter",Times,serif;
     font-size: 30px;
     padding:0 15px 0 0;
     text-decoration: none;
@@ -630,6 +642,7 @@ ol.notelist li .comment-reply-link a {
 	position:absolute;
 	top:22px;
 	left:23px;
+
 }
 
 #contact{
@@ -675,7 +688,7 @@ ol.notelist li .comment-reply-link a {
 	text-align: center;
 	color: #BBB;
 	font-size: 2em;
-	font-family: EnglandHandDBRegular,Arial, sans-serif;
+	font-family: BenthamRegular,Arial, sans-serif;
 }
  
 #droplabel {
@@ -805,16 +818,25 @@ ol.notelist li .comment-reply-link a {
 
 }
 
-input{font-family:EnglandHandDBRegular !important;}
-.submitButton {float:left; margin-left:30%; font-family:EnglandHandDBRegular;font-size:20px;}
+input{font-family:BenthamRegular !important;}
+.submitButton {float:left; margin-left:30%; font-family:BenthamRegular;font-size:20px;}
 .instructions{margin-top:25px; margin-right:3px; margin-left:3px; font-size:15px;}
 
-#container, #menu{font-family:EnglandHandDBRegular;}
+#container, #menu{font-family:BenthamRegular;}
 #menu{font-size:25px;}
 label {font-size:25px !important;}
 
 
 body, input, textarea {
-font: 20px EnglandHandDBRegular, Arial,sans-serif;
+font: 20px BenthamRegular, Arial,sans-serif;
 }
 
+.logo{width:35px;height:35px;}
+
+.menu-item-126 a {
+	background: url('img/logo35x35.png') no-repeat ;
+	width:35px;
+	color:transparent !important;}
+
+.menu-item-126 a:hover {text-decoration: none !important; }
+	

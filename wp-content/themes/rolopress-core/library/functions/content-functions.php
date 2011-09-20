@@ -330,7 +330,7 @@ function rolo_loop() { ?>
 		if($current_user_id != $author_id)
 			continue;
 
-		$thumbid = get_post_thumbnail_id($post->ID);		
+			$thumbid = get_post_thumbnail_id($post->ID);		
 			$frame_number = get_post_meta($post->ID, 'rolo_contact_framename', true);					
 			$thumb = wp_get_attachment_image_src($thumbid, $frame_number); // <------- NAO ESTA A FUNCIONAR
 		
@@ -372,7 +372,7 @@ function rolo_loop() { ?>
 			
 					
 		if (is_single() ) 
-		{  
+		{ 
 			if ( rolo_type_is( 'contact' ) ) 
 			{ 
 				
@@ -409,7 +409,7 @@ function rolo_loop() { ?>
 					<div class="phone">
 						<script type="text/javascript" src="http://download.skype.com/share/skypebuttons/js/skypeCheck.js"></script>
 						<a href="skype: <?php echo $skype_name;?> ?call">
-						<img src="<?php echo get_bloginfo('template_url').'/library/images/Old-Phone.png';?>" style="border: none;" width="92" height="82" alt="Skype Me™!" /></a>
+						<img src="<?php echo get_bloginfo('template_url').'/library/images/logo92x92.png';?>" style="border: none;" width="92" height="92" alt="Skype Me™!" /></a>
 					</div>	
 					
 					<div>
@@ -444,21 +444,30 @@ function rolo_loop() { ?>
 				the_content();
 			
 				}
-				
+				rolo_entry_footer();
 			} //end if is single
 					
 			elseif (is_search() ) { ?>
-			<div id="contact">
-			<?php 					
-				if( rolo_type_is( 'contact' ) ) { rolo_contact_header(get_the_ID()); }
-				elseif( rolo_type_is( 'company' ) ) { rolo_company_header(get_the_ID()); }
-				else { ?>
-					<li id="entry-<?php echo basename(get_permalink());?>" class="entry-header">
-			<?php	echo '<img class="entry-icon" src=' . ROLOPRESS_IMAGES . '/icons/rolo-default.jpg />' ?>
-					<a class="entry-title" href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a>
-					</li>
-			<?php	 }
-					} // end if is search
+			
+			<div id="contact-list">		
+			<div class="photo" id="<?php echo 'frame'.$frame_number;?>">
+				<a href="<?php echo $link;?>">
+				<span class="<?php echo $frame_number; ?>" style="background: url('') no-repeat;">
+				
+				<?php the_post_thumbnail($frame_number); // AQUI É ONDE É POSTA A FOTO ?>
+				
+				</span>
+				</a>
+				    <img src="<?php echo get_bloginfo('template_url').'/library/images/frames/'.$frame_number.'.png';?>" alt="">		
+				<div class="title">
+					<?php the_title();?>
+				</div>
+			</div>
+		</div>	<!-- close div contact -->
+			
+			<?php 
+					
+			} // end if is search
 									
 			elseif (is_page() ) { 
 				?><div id="contact"><?php 
@@ -489,7 +498,7 @@ function rolo_loop() { ?>
 					
 			<!-- 	</div> --><!-- .entry-main -->
 					
-				<?php rolo_entry_footer(); ?>
+			
 
 				<?php rolopress_after_entry(); // After entry hook ?>
 				

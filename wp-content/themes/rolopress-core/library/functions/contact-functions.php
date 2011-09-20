@@ -24,8 +24,10 @@ function rolo_add_contact() {
             $contact_id = _rolo_save_contact_fields();
             if ($contact_id) {
                 echo __("Contacto adicionado com sucesso.", 'rolopress');
-            } else {
-                echo __("Ocorreu um erro ao inserir o contacto", 'rolopress');
+            } else { 
+                echo __("Ocorreu um erro ao inserir o contacto, por favor tente novamente.", 'rolopress');
+                  _rolo_show_contact_fields(); 
+                  
     //            TODO - Handle Error properly
             }
         } elseif (isset($_POST['rp_add_notes']) && $_POST['rp_add_notes'] == 'add_notes') {
@@ -218,7 +220,7 @@ function _rolo_show_edit_contact_form($contact_id) {
  * @global array $company_fields List of contact fields
  * @since 0.1
  */
-function _rolo_show_contact_fields() {
+function _rolo_show_contact_fields() { 
 	global $contact_fields;
 	$rolo_tab_index = 1000;
 ?>
