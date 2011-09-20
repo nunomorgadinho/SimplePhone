@@ -424,39 +424,42 @@ function _rolo_save_contact_fields() {
         
         // ------------------------------------------
         
-        // como ja fizemos o upload por ajax agora basta ir buscar as imagens ah directoria temp
-		$upload = wp_upload_bits($_POST['filename'], null, file_get_contents(ABSPATH."wp-content/themes/rolopress-core/library/includes/".$_POST['filename']));
+        if (!empty($_POST['filename']))
+        {
+        	// como ja fizemos o upload por ajax agora basta ir buscar as imagens ah directoria temp
+			$upload = wp_upload_bits($_POST['filename'], null, file_get_contents(ABSPATH."wp-content/themes/rolopress-core/library/includes/".$_POST['filename']));
 
-	//	print_r($upload);
+			//	print_r($upload);
 		
-	    $type = '';
-	    if ( !empty($upload['type']) )
-	        $type = $upload['type'];
-	    else {
-	        $mime = wp_check_filetype( $upload['file'] );
-	        if ($mime)
-	          $type = $mime['type'];
-	    }
-	     	    
-	   $attachment = array(
-	            'post_title' => basename( $upload['file'] ),
-	            'post_content' => '',
-	            'post_type' => 'attachment',
-	            'post_parent' => $post_id,
-	            'post_mime_type' => $type,
-	            'guid' => $upload[ 'url' ],
-	   	);
+	    	$type = '';
+		    if ( !empty($upload['type']) )
+		        $type = $upload['type'];
+		    else {
+		        $mime = wp_check_filetype( $upload['file'] );
+		        if ($mime)
+		          $type = $mime['type'];
+		    }
+		     	    
+		   $attachment = array(
+		            'post_title' => basename( $upload['file'] ),
+		            'post_content' => '',
+		            'post_type' => 'attachment',
+		            'post_parent' => $post_id,
+		            'post_mime_type' => $type,
+		            'guid' => $upload[ 'url' ],
+		   	);
+		
+		   	require_once("wp-admin/includes/image.php");
 	
-	   	require_once("wp-admin/includes/image.php");
-
-	   	// Save the data
-	   	$id = wp_insert_attachment( $attachment, $upload[ 'file' ], $post_id );
-
-	   	wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $upload[ 'file' ] ) );
-	   	
-   		// Set as featured
-		set_featured_foto($post_id, $id);
-
+		   	// Save the data
+		   	$id = wp_insert_attachment( $attachment, $upload[ 'file' ], $post_id );
+	
+		   	wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $upload[ 'file' ] ) );
+		   	
+	   		// Set as featured
+			set_featured_foto($post_id, $id);
+        }
+        
         // ------------------------------------------
         
         // frame
