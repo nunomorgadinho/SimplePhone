@@ -53,7 +53,7 @@ add_theme_support( 'post-formats', array( 'image', 'gallery' ) );
 add_theme_support( 'post-thumbnails' );
 
 if ( function_exists( 'add_image_size' ) ) { 
-	add_image_size( 'frame1', 163, 221, true ); //(cropped)
+	/*add_image_size( 'frame1', 163, 221, true ); //(cropped)
 	add_image_size( 'frame2', 146, 174, true );
 	add_image_size( 'frame3', 122, 102, true );
 	add_image_size( 'frame4', 214, 179, true );
@@ -61,7 +61,26 @@ if ( function_exists( 'add_image_size' ) ) {
 	add_image_size( 'frame6', 264, 194, true );
 	add_image_size( 'frame7', 259, 357, true );
 	add_image_size( 'frame8', 176, 116, true );
-	add_image_size( 'frame9', 373, 231, true );
+	add_image_size( 'frame9', 373, 231, true );*/
+
+	add_image_size( 'frame1', 181, 244, true ); //(cropped)
+	add_image_size( 'frame2', 184, 209, true );
+	add_image_size( 'frame3', 174, 148, true );
+	add_image_size( 'frame4', 178, 149, true );
+	add_image_size( 'frame5', 172, 210, true );
+	add_image_size( 'frame6', 210, 140, true );
+	add_image_size( 'frame7', 181, 251, true );
+	add_image_size( 'frame8', 213, 139, true );
+	add_image_size( 'frame9', 235, 144, true );
+	
+	
+	add_image_size( 'frame10', 224, 274, true ); //(cropped)
+	add_image_size( 'frame11', 225, 168, true );
+	add_image_size( 'frame12', 222, 205, true );
+	add_image_size( 'frame13', 226, 124, true );
+	add_image_size( 'frame14', 227, 189, true );
+	add_image_size( 'frame15', 223, 291, true );
+	add_image_size( 'frame16', 226, 140, true );
 }
 
 ?>

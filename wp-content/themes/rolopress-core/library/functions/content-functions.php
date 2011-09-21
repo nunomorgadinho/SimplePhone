@@ -27,7 +27,7 @@ function rolo_pageheader() {
 	} elseif (is_home()) {    
         $pagetitle = '<h2 class="page-title home">' . __('All Items', 'rolopress') . "</h2>\n";
 	} elseif (is_search()) {    
-        $pagetitle = '<h2 class="page-title search">' . __('Search Results for: ', 'rolopress') . '"' . get_search_query() . '"' . "</h2>\n";
+        $pagetitle = '<h2 class="page-title search">' . __('Resultados da Pesquisa: ', 'rolopress') . '"' . get_search_query() . '"' . "</h2>\n";
 	} elseif (is_category()) {
 			$current_category = single_cat_title("", false);
 			$pagedesc = category_description();
@@ -351,7 +351,7 @@ function rolo_loop() { ?>
 				
 		?>
 		<div id="contact-list">		
-			<div class="photo" id="<?php echo 'frame'.$frame_number;?>">
+			<div class="photo" id="<?php echo $frame_number;?>">
 				<a href="<?php echo $link;?>">
 				<span class="<?php echo $frame_number; ?>" style="background: url('') no-repeat;">
 				
@@ -360,9 +360,10 @@ function rolo_loop() { ?>
 				</span>
 				</a>
 				    <img src="<?php echo get_bloginfo('template_url').'/library/images/frames/'.$frame_number.'.png';?>" alt="">		
-				<div class="title">
-					<?php the_title();?>
-				</div>
+			 	<!-- 	<div id="title"> 	 -->
+					<?php //the_title();?>
+		  		 <!-- </div>  --> 
+		  		
 			</div>
 		</div>	<!-- close div contact -->
 		
@@ -423,10 +424,10 @@ function rolo_loop() { ?>
    						    $zip = rolo_get_term_list($contact_id, 'zip');
         					$country = rolo_get_term_list($contact_id, 'country');
 
-					        $city = ($city == '') ? 'Cidade' : $city;
+					        $city = ($city == '') ? '' : $city;
 					     //   $state = ($state == '') ? 'State' : $state;
-					        $zip = ($zip == '') ? 'Código Postal' : $zip;
-					        $country = ($country == '') ? 'País' : $country;
+					        $zip = ($zip == '') ? '' : $zip;
+					        $country = ($country == '') ? '' : $country;
     						 
     						 
     						if(isset($address)){

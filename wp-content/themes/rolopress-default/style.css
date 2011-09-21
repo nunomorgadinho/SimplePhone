@@ -17,7 +17,17 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 
+@font-face {
+    font-family: 'NeutonRegular';
+    src: url('fonts/neuton-webfont.eot');
+    src: url('fonts/neuton-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/neuton-webfont.woff') format('woff'),
+         url('fonts/neuton-webfont.ttf') format('truetype'),
+         url('fonts/neuton-webfont.svg#NeutonRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
 
+}
 
 @font-face {
     font-family: 'EnglandHandDBRegular';
@@ -41,12 +51,26 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
     font-style: normal;
 
 }
+/*
+body {
+background: white url(img/PolaroidTemplate1.png) !important;
+}*/
 
+
+body {
+	background: white url(img/5texture.jpg) repeat !important;
+ 	position:fixed !important;
+ 	top:0 !important;
+ 	left:0 !important;
+ 	width:100% !important;
+  	height:100% !important;
+  	background-size: 100% !important;
+}
 
 body, html {
     margin: 0;
     padding:0;
-    font-family:"BenthamRegular, Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif !important;
+    font-family:"NeutonRegular, Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif !important;
 }
 #wrapper {
     clear: both;
@@ -126,8 +150,8 @@ a:hover {
 }
 
 #menu .home a{
-    font-family: BenthamRegular, Georgia,"Times New Roman","Bitstream Charter",Times,serif;
-    font-size: 30px;
+    font-family: NeutonRegular, Georgia,"Times New Roman","Bitstream Charter",Times,serif;
+    font-size: 20px;
     padding:0 15px 0 0;
     text-decoration: none;
     color: white;
@@ -640,8 +664,8 @@ ol.notelist li .comment-reply-link a {
 	height:100%;
 	display:block;
 	position:absolute;
-	top:22px;
-	left:23px;
+/*	top:22px;
+	left:23px;*/
 
 }
 
@@ -688,7 +712,7 @@ ol.notelist li .comment-reply-link a {
 	text-align: center;
 	color: #BBB;
 	font-size: 2em;
-	font-family: BenthamRegular,Arial, sans-serif;
+	font-family: NeutonRegular,Arial, sans-serif;
 }
  
 #droplabel {
@@ -705,130 +729,222 @@ ol.notelist li .comment-reply-link a {
 /*Sizes for images inside frame*/
 .frame1
 {
-	top: 32px !important;
-	left: 29px !important;	
+	top: 39px !important;
+	left: 36px !important;	
 }
 
 .frame2
 {
-	top: 24px !important;
-	left: 26px !important;	
+	top: 31px !important;
+	left: 33px !important;	
 }
 
 .frame3
 {
-	left: 26px !important;
+	left: 39px !important;
+	top: 32px !important;
 }
 
 .frame4
 {
-	top: 39px !important;
-	left: 44px !important;
+	top: 35px !important;
+	left: 41px !important;
 }
 
 .frame5
 {
-	top: 33px !important;
-	left: 38px !important;
+	top: 36px !important;
+	left: 42px !important;
 }
 
 .frame6
 {
-	top: 34px !important;
-	left: 36px !important;
+	top: 31px !important;
+	left: 24px !important;
 }
 
 .frame7
 {
-	top: 51px !important;
-	left: 53px !important;
+	top: 39px !important;
+	left: 40px !important;
 }
 
 .frame8
 {
-	top: 12px !important;
-	left: 14px !important;
+	top: 19px !important;
+	left: 22px !important;
 }
 
 .frame9
 {
-	top: 24px !important;
+	top: 16px !important;
+	left: 16px !important;
+}
+
+
+.frame10
+{
+	top: 20px !important;
+	left: 22px !important;	
+}
+
+.frame11
+{
+	top: 15px !important;
+	left: 20px !important;	
+}
+
+.frame12
+{
+	left: 22px !important;
+	top:15px !important;
+}
+
+.frame13
+{
+	top: 12px !important;
+	left: 21px !important;
+}
+
+.frame14
+{
+	top: 20px !important;
+	left: 13px !important;
+}
+
+.frame15
+{
+	top: 20px !important;
+	left: 22px !important;
+}
+
+.frame16
+{
+	top: 14px !important;
 	left: 24px !important;
 }
 
 /*Actual size of the frame*/
 #frame1
 {
-	width: 237px !important;
-	height: 301px !important;	
+	width: 265px !important;
+	height: 337px !important;	
 }
 
 #frame2
 {
-	width: 210px !important;
-	height: 241px !important;	
+	width: 265px !important;
+	height: 292px !important;	
 }
 
 #frame3
 {
-	width: 185px !important;
-	height: 162px !important;	
+	width: 265px !important;
+	height: 232px !important;	
 
 }
 
 #frame4
 {
-	width: 311px !important;
-	height: 269px !important;	
+	width: 265px !important;
+	height: 229px !important;	
 
 }
 
 #frame5
 {
-	width: 256px !important;
-	height: 285px !important;	
+	width: 265px !important;
+	height: 295px !important;	
 
 }
 
 #frame6
 {
-	width: 345px !important;
-	height: 277px !important;	
+	width: 265px !important;
+	height: 213px !important;	
 
 }
 
 #frame7
 {
-	width: 373px !important;
-	height: 475px !important;	
+	width: 265px !important;
+	height: 337px !important;	
 
 }
 
 #frame8
 {
-	width: 213px !important;
-	height: 156px !important;	
+	width: 265px !important;
+	height: 190px !important;	
 
 }
 
 #frame9
 {
-	width: 421px !important;
-	height: 280px !important;	
+	width: 265px !important;
+	height: 176px !important;	
 
 }
 
-input{font-family:BenthamRegular !important;}
-.submitButton {float:left; margin-left:30%; font-family:BenthamRegular;font-size:20px;}
+
+#frame10
+{
+	width: 265px !important;
+	height: 376px !important;	
+}
+
+#frame11
+{
+	width: 263px !important;
+	height: 238px !important;	
+}
+
+#frame12
+{
+	width: 263px !important;
+	height: 282px !important;	
+
+}
+
+#frame13
+{
+	width: 265px !important;
+	height: 180px !important;	
+
+}
+
+#frame14
+{
+	width: 265px !important;
+	height: 264px !important;	
+
+}
+
+#frame15
+{
+	width: 263px !important;
+	height: 402px !important;	
+
+}
+
+#frame16
+{
+	width: 269px !important;
+	height: 202px !important;	
+
+}
+
+input{font-family:NeutonRegular !important;}
+.submitButton {float:left; margin-left:30%; font-family:NeutonRegular;font-size:20px;}
 .instructions{margin-top:25px; margin-right:3px; margin-left:3px; font-size:15px;}
 
-#container, #menu{font-family:BenthamRegular;}
-#menu{font-size:25px;}
-label {font-size:25px !important;}
+#container, #menu{font-family:NeutonRegular;}
+#menu{font-size:15px;}
+label {font-size:22px !important;}
 
 
 body, input, textarea {
-font: 20px BenthamRegular, Arial,sans-serif;
+font: 15px NeutonRegular, Arial,sans-serif;
 }
 
 .logo{width:35px;height:35px;}
@@ -839,4 +955,17 @@ font: 20px BenthamRegular, Arial,sans-serif;
 	color:transparent !important;}
 
 .menu-item-126 a:hover {text-decoration: none !important; }
-	
+
+.image{position:relative;}
+#label{
+	background:transparent;
+	position:absolute;
+	font-size:25px;
+}
+
+#frame10 #label{top:315px;left:65px;}
+#frame11 #label{top:190px;left:65px;}
+#frame12 #label{top:230px;left:65px;}
+#frame13 #label{top:140px;left:50px;}
+#frame15 #label{top:340px;left:65px;}
+#frame16 #label{top:160px;left:65px;}

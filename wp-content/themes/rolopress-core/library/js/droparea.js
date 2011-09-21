@@ -81,7 +81,7 @@
             'init': m.init,
             'start': m.start,
             'complete': m.complete,
-            'instructions': 'Arraste imagem para <br/>dentro da molduta!',
+            'instructions': 'Arraste imagem para <br/>dentro da moldura!',
             'over'        : 'Largue imagem aqui!',
             'nosupport'   : 'No support for the File API in this web browser',
             'noimage'     : 'Tipo de ficheiro não suportado!',

@@ -22,8 +22,9 @@ function rolo_add_contact() {
 
         if (isset($_POST['rp_add_contact']) && $_POST['rp_add_contact'] == 'add_contact') {
             $contact_id = _rolo_save_contact_fields();
-            if ($contact_id) {
-                echo __("Contacto adicionado com sucesso.", 'rolopress');
+            if ($contact_id) { 
+                echo __("Contacto adicionado com sucesso.", 'rolopress'); 
+                
             } else { 
                 echo __("Ocorreu um erro ao inserir o contacto, por favor tente novamente.", 'rolopress');
                   _rolo_show_contact_fields(); 
@@ -239,7 +240,7 @@ function _rolo_show_contact_fields() {
 	// Get one of the nine frames possible
 	$frame_number =  rand(1, 9);
 	$src = get_bloginfo('template_url').'/library/images/frames/frame'.$frame_number.'.png';
-	
+		
 	//list($w, $h) = getimagesize($src);
 	
 	// $sizes_custom = get_option('aisz_sizes');

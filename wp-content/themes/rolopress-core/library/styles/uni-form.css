@@ -86,8 +86,8 @@
     float:left;
     /* user prefs */
     width:65%;
-    border:2px solid #fff;
-    background:#dfdfdf;
+    border:2px solid #dfdfdf;
+    background:#fff;
 }
 .inlineLabels .multipleInput .textInput {
     width:30%;
@@ -140,8 +140,8 @@
     float:left;
     width:65%;
     /* user prefs */
-    border:2px solid #fff;
-    background: #dfdfdf;
+    border:2px solid #dfdfdf;
+    background: #fff;
     padding: 0;
 }
 .prefix {
