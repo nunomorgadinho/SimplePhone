@@ -413,7 +413,7 @@ function rolo_loop() { ?>
 						<img src="<?php echo get_bloginfo('template_url').'/library/images/logo92x92.png';?>" style="border: none;" width="92" height="92" alt="Skype Me™!" /></a>
 					</div>	
 					
-					<div>
+					<div class="address">
 						<?php 
 							 $contact = get_post_meta($post->ID, 'rolo_contact');
     						 $contact = $contact[0];
@@ -430,7 +430,7 @@ function rolo_loop() { ?>
 					        $country = ($country == '') ? '' : $country;
     						 
     						 
-    						if(isset($address)){
+    						if(isset($address) && ($address!='' || $zip.$city.$country !='')){
     							echo "Morada:<br/>";
     							echo $address.' '.$zip.' '.$city.' '.$country;
     						}
