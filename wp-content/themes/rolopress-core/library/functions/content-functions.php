@@ -377,7 +377,12 @@ function rolo_loop() { ?>
 			if ( rolo_type_is( 'contact' ) ) 
 			{ 
 				
-				
+				$contact = get_post_meta($post->ID, 'rolo_contact', true);
+
+			    if(isset($contact['rolo_contact_phone']))
+			    {	$skype_name =$contact['rolo_contact_phone'];
+			    	$link = "skype:".$skype_name." ?call"; 
+			    }
 				
 			?> 
 			<h2 class="title"><?php the_title();?></h2>
@@ -399,11 +404,11 @@ function rolo_loop() { ?>
 				
 				<?php 		
 		
-			    $contact = get_post_meta($post->ID, 'rolo_contact', true);
+		//	    $contact = get_post_meta($post->ID, 'rolo_contact', true);
 
 			    if(isset($contact['rolo_contact_phone']))
 			    {
-			    	$skype_name =$contact['rolo_contact_phone'];
+			    	
 								
 				?>
 					<div class="right">
