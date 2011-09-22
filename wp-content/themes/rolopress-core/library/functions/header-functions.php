@@ -145,7 +145,7 @@ function rolopress_default_top_menu_right() { ?>
                         $s = '';
                     }
 ?>
-                    <input id="s" name="s" type="text" value="<?php echo wp_specialchars(stripslashes($s), true) ?>" size="20" tabindex="1" />
+                    <input class="search" id="s" name="s" type="text" value="<?php echo wp_specialchars(stripslashes($s), true) ?>" size="20" tabindex="1" />
                     <input id="searchsubmit" name="searchsubmit" type="submit" value="<?php _e('Procurar', 'rolopress') ?>" tabindex="2" />
                 </form>
             </li>
@@ -155,7 +155,53 @@ function rolopress_default_top_menu_right() { ?>
             <?php // endif // $user_level >= 1 ?>
             <li><?php $siteurl = get_bloginfo('siteurl');
             		  if(get_current_user_id() ==0) wp_register(); wp_loginout($siteurl);?></li>
+       
+	        <li>
+	        	<?php 	
+	        		$texture = 0;
+	        		$selected = "selected='selected'";
+	        		$user_id = get_current_user_id();
+	        		if(get_user_meta($user_id, 'wallpaper',true))
+							$texture =get_user_meta($user_id, 'wallpaper',true);
+									
+				?>
+	        	<form class='wallpaper_select' method='post' action="<?php echo curPageURL();?>">
+					<select class="postform" id="texture" name="texture"> 
+						<option <?php if($texture==0) echo $selected;?> value='0'>Default</option>
+						<option <?php if($texture==1) echo $selected;?> value='1' type='submit'>1</option>
+						<option <?php if($texture==2) echo $selected;?>value='2'>2</option>
+						<option <?php if($texture==3) echo $selected;?> value='3'>3</option>
+						<option <?php if($texture==4) echo $selected;?> value='4'>4</option>
+						<option <?php if($texture==5) echo $selected;?> value='5'>5</option>
+						<option <?php if($texture==6) echo $selected;?> value='6'>6</option>
+						<option <?php if($texture==7) echo $selected;?> value='7'>7</option>
+						<option <?php if($texture==8) echo $selected;?> value='8'>8</option>
+						<option <?php if($texture==9) echo $selected;?> value='9'>9</option>
+						<option <?php if($texture==10) echo $selected;?> value='10'>10</option>
+						<option <?php if($texture==11) echo $selected;?>value='11'>11</option>
+					</select>
+					<input class='avia_submit' type='submit' value='Ok'/>
+			</form>
+	        </li>
+	         <li class="wallpaper">
+	        	Papel de Parede:
+	        </li>
+        
         </ul>
 <?php
 }
+
+
+function curPageURL() {
+ $pageURL = 'http';
+ if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
+ $pageURL .= "://";
+ if ($_SERVER["SERVER_PORT"] != "80") {
+  $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+ } else {
+  $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+ }
+ return $pageURL;
+}
+
 ?>

@@ -238,7 +238,7 @@ function _rolo_show_contact_fields() {
 //	echo get_avatar ('',96, rolo_get_twitter_profile_image('', ROLOPRESS_IMAGES . "/icons/rolo-contact.jpg") );
 	
 	// Get one of the nine frames possible
-	$frame_number =  rand(1, 9);
+	$frame_number = rand(1, 9);
 	$src = get_bloginfo('template_url').'/library/images/frames/frame'.$frame_number.'.png';
 		
 	//list($w, $h) = getimagesize($src);
@@ -260,11 +260,11 @@ function _rolo_show_contact_fields() {
 				<a href="<?php echo $link;?>">
 				<span class="droparea spot frame<?php echo $frame_number; ?>" data-width="<?php echo $w; ?>" data-height="<?php echo $h; ?>" data-type="jpg" data-crop="true" style="background: url('') no-repeat;"></span>
 				</a>
-					<img src="<?php echo $src; ?>" alt="">		
-				
+					<img src="<?php echo $src; ?>" alt="">	
 			</div>
+		
 		</div>	<!-- close div contact -->
-
+		
 
 	<script src="http://simplephone.com/wp-content/themes/rolopress-core/library/js/droparea.js" type="text/javascript"></script>
 	<script>

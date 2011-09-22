@@ -8,6 +8,30 @@
 <?php rolopress_head(); // rolopress head hook ?>
 <?php wp_head(); // wordpress head hook ?>
 
+<?php 
+	$user_id = get_current_user_id();
+	
+	$texture = 0;
+	
+	
+	if(get_user_meta($user_id, 'wallpaper',true))
+		$texture =get_user_meta($user_id, 'wallpaper',true);
+		
+	if(isset($_POST['texture'])){
+		$texture = $_POST['texture'];
+		//save option
+		update_user_meta($user_id, 'wallpaper', $texture);
+	}
+	$src = get_bloginfo('stylesheet_directory').'/img/';	
+		
+?>
+
+<style type="text/css">
+	body{
+	background: white url(<?php echo $src.$texture;?>texture.jpg) repeat !important;
+}	
+</style>
+
 </head>
 
 <body class="<?php rolopress_body_class() ?>">
