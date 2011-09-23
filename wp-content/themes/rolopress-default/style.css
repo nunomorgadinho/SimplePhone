@@ -57,7 +57,7 @@ background: white url(img/PolaroidTemplate1.png) !important;
 }*/
 
 body{
-	background: white url(img/5texture.jpg) repeat !important;
+	background: white url(img/0texture.jpg) repeat !important;
 }
 
 body {
@@ -977,3 +977,7 @@ font: 15px NeutonRegular, Arial,sans-serif;
 .wallpaper {color:#ccc;}
 .wallpaper_select{margin-right:10px;}
 .search{font-size:10px;}
+
+.change_frame{ background-color:#fff !important; width:25px;height:25px; border:1px solid #ccc;}
+.change_frame a {}
+.change_frame:hover{border:1px solid #000;}
