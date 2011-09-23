@@ -282,8 +282,9 @@ function _rolo_show_contact_fields() {
 				</a>
 				 	<img src="<?php echo $src; ?>" alt=""> 
 			</div>
-		<span class="change_frame"> <a  href="?pframe=<?php echo $previous;?>">-</a></span>
-		<span class="change_frame"> <a  href="?pframe=<?php echo $next?>">+</a></span>
+			<span class="info">Use as setas para escolher a moldura.</span><br/>
+		 <a id="change_frame_left"  href="?pframe=<?php echo $previous;?>"><<</a>
+	 	<a  id="change_frame_right" href="?pframe=<?php echo $next?>">>></a>
 		</div>	<!-- close div contact -->
 		
 

@@ -973,11 +973,22 @@ font: 15px NeutonRegular, Arial,sans-serif;
 #frame16 #label{top:160px;left:65px;}
 
 .address {margin-left:10px;}
+#logout{margin-left:10px;}
 
 .wallpaper {color:#ccc;}
 .wallpaper_select{margin-right:10px;}
 .search{font-size:10px;}
 
-.change_frame{ background-color:#fff !important; width:25px;height:25px; border:1px solid #ccc;}
-.change_frame a {}
-.change_frame:hover{border:1px solid #000;}
+
+
+#change_frame_right , #change_frame_left 
+{
+ border: 4px ridge;
+ padding: 2px;
+ text-decoration: none;
+ border-color:#ccc;
+ font-size:10px;
+  }
+.info {
+	font-size:15px;
+}

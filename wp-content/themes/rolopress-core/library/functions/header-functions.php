@@ -136,6 +136,11 @@ add_action('rolopress_before_wrapper', 'rolopress_default_top_menu');
 function rolopress_default_top_menu_right() { ?>
 
         <ul class="menu_item sub_menu alignright default_menu">
+         <li id="logout"><?php $siteurl = get_bloginfo('siteurl');
+            		  if(get_current_user_id() ==0) wp_register(); wp_loginout($siteurl);?>
+           </li>
+       
+        
             <li>
                 <form id="searchform" method="get" action="<?php bloginfo('url') ?>">
 <?php
@@ -153,9 +158,7 @@ function rolopress_default_top_menu_right() { ?>
             <?php //if ( $user_level >= 1 ) : ?>
                <!--  <li><a title="settings" href="<?php bloginfo('url') ?>/wp-admin/"><span><?php _e('Settings', 'rolopress') ?></span></a></li> -->
             <?php // endif // $user_level >= 1 ?>
-            <li><?php $siteurl = get_bloginfo('siteurl');
-            		  if(get_current_user_id() ==0) wp_register(); wp_loginout($siteurl);?></li>
-       
+           
 	        <li>
 	        	<?php 	
 	        		$texture = 0;
@@ -186,6 +189,7 @@ function rolopress_default_top_menu_right() { ?>
 	         <li class="wallpaper">
 	        	Papel de Parede:
 	        </li>
+	       
         
         </ul>
 <?php
