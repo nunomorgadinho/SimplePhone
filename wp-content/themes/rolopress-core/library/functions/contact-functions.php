@@ -238,7 +238,25 @@ function _rolo_show_contact_fields() {
 //	echo get_avatar ('',96, rolo_get_twitter_profile_image('', ROLOPRESS_IMAGES . "/icons/rolo-contact.jpg") );
 	
 	// Get one of the nine frames possible
-	$frame_number = rand(1, 9);
+	$pframe  = 1;
+	$previous = 9;
+	$next = 2;
+	if (!empty($_GET['pframe']) && $_GET['pframe'] >0 && $_GET['pframe'] <10 )
+	{
+		$pframe = $_GET['pframe'];
+	
+		switch ($pframe) {
+			case 1: $next = 2; $previous = 9;
+			break;
+			case 9: $next = 1; $previous = 8;
+			break;
+			default: $next= $pframe+1; $previous=$pframe-1;
+			break;
+		}
+	}	
+
+	$frame_number = $pframe;
+		
 	$src = get_bloginfo('template_url').'/library/images/frames/frame'.$frame_number.'.png';
 		
 	//list($w, $h) = getimagesize($src);
@@ -255,14 +273,17 @@ function _rolo_show_contact_fields() {
 	 	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script>
  
+
+
 	<div id="contact">		
 			<div class="photo" id="<?php echo 'frame'.$frame_number;?>">
 				<a href="<?php echo $link;?>">
 				<span class="droparea spot frame<?php echo $frame_number; ?>" data-width="<?php echo $w; ?>" data-height="<?php echo $h; ?>" data-type="jpg" data-crop="true" style="background: url('') no-repeat;"></span>
 				</a>
-					<img src="<?php echo $src; ?>" alt="">	
+				 	<img src="<?php echo $src; ?>" alt=""> 
 			</div>
-		
+		<span class="change_frame"> <a  href="?pframe=<?php echo $previous;?>">-</a></span>
+		<span class="change_frame"> <a  href="?pframe=<?php echo $next?>">+</a></span>
 		</div>	<!-- close div contact -->
 		
 
