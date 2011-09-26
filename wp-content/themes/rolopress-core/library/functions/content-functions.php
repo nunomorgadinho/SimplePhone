@@ -385,8 +385,8 @@ function rolo_loop() { ?>
 			    }
 				
 			?> 
-			<h2 class="title"><?php the_title();?></h2>
-				<div id="contact-single" style="width: 940px;"> 
+			<h2 class="page-title"><?php the_title();?></h2>
+				<div id="contact-single" > 
 				
 				<div class="left">
 				<div style="float:right;">
@@ -404,19 +404,13 @@ function rolo_loop() { ?>
 				
 				<?php 		
 		
-		//	    $contact = get_post_meta($post->ID, 'rolo_contact', true);
-
 			    if(isset($contact['rolo_contact_phone']))
 			    {
 			    	
 								
 				?>
 					<div class="right">
-					<div class="phone">
-						<script type="text/javascript" src="http://download.skype.com/share/skypebuttons/js/skypeCheck.js"></script>
-						<a href="skype: <?php echo $skype_name;?> ?call">
-						<img src="<?php echo get_bloginfo('template_url').'/library/images/logo92x92.png';?>" style="border: none;" width="92" height="92" alt="Skype Me™!" /></a>
-					</div>	
+					
 					
 					<div class="address">
 						<?php 

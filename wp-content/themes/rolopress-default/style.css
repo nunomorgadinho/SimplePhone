@@ -680,14 +680,16 @@ ol.notelist li .comment-reply-link a {
 }
 
 #contact-list, #contact-single{
-	float:left;
+	margin-left:auto;
+	margin-right:auto;
 	display:inline;
 	margin-top:20px;
 }
 
-#contat-single{width:940px !important;}
-.left{width:469px; float:left;}
-.right{width:469px; float:right;}
+
+#contat-single{width:940px !important; }
+.left{width:469px; float:left; margin-top:50px; }
+.right{width:469px; float:right; margin-top:50px;}
 
 .title{
 	width:auto;
@@ -972,7 +974,6 @@ font: 15px NeutonRegular, Arial,sans-serif;
 #frame15 #label{top:340px;left:65px;}
 #frame16 #label{top:160px;left:65px;}
 
-.address {margin-left:10px;}
 #logout{margin-left:10px;}
 
 .wallpaper {color:#ccc;}
