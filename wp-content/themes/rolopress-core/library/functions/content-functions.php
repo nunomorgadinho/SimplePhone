@@ -346,6 +346,19 @@ function rolo_loop() { ?>
 			$w = $_wp_additional_image_sizes['frame'.$frame_number]['width'];
 			$h = $_wp_additional_image_sizes['frame'.$frame_number]['height'];
 			
+			
+		if ( rolo_type_is( 'contact' ) ) 
+			{ 
+				$contact = get_post_meta($post->ID, 'rolo_contact', true);
+			    if(isset($contact['rolo_contact_phone']))
+			    {	$skype_name =$contact['rolo_contact_phone'];
+			    	$link = "skype:".$skype_name." ?call"; 
+    			 $skype_status= getSkypeStatus($skype_name); 
+			    }
+			    
+			   
+			}	
+			
 		if ( (is_archive() || is_home())) 
 		{
 				
@@ -359,7 +372,7 @@ function rolo_loop() { ?>
 				
 				</span>
 				</a>
-				    <img src="<?php echo get_bloginfo('template_url').'/library/images/frames/'.$frame_number.'.png';?>" alt="">		
+				    <img class="<?php echo $skype_status;?>" src="<?php echo get_bloginfo('template_url').'/library/images/frames/'.$frame_number.'.png';?>" alt="">		
 			 	<!-- 	<div id="title"> 	 -->
 					<?php //the_title();?>
 		  		 <!-- </div>  --> 
@@ -376,28 +389,21 @@ function rolo_loop() { ?>
 		{ 
 			if ( rolo_type_is( 'contact' ) ) 
 			{ 
-				
-				$contact = get_post_meta($post->ID, 'rolo_contact', true);
-
-			    if(isset($contact['rolo_contact_phone']))
-			    {	$skype_name =$contact['rolo_contact_phone'];
-			    	$link = "skype:".$skype_name." ?call"; 
-			    }
-				
 			?> 
 			<h2 class="page-title"><?php the_title();?></h2>
 				<div id="contact-single" > 
 				
 				<div class="left">
-				<div style="float:right;">
-				<div class="photo" id="<?php echo 'frame'.$frame_number;?>">
 				
+ 				<div style="float:right;">
+				
+				<div class="photo" id="<?php echo 'frame'.$frame_number;?>">
 					<a href="<?php echo $link;?>">
-					<span class="<?php echo $frame_number; ?>" style="background: url('') no-repeat;">
+					<span class="<?php echo $frame_number;  ?>" style="background: url('') no-repeat;">
 						<?php the_post_thumbnail($frame_number); // AQUI É ONDE É POSTA A FOTO ?>
 					</span>
 					</a>
-						<img src="<?php echo get_bloginfo('template_url').'/library/images/frames/'.$frame_number.'.png';?>" alt="">		
+						<img class="<?php echo $skype_status;?>" src="<?php echo get_bloginfo('template_url').'/library/images/frames/'.$frame_number.'.png';?>" alt="">		
 				</div>	
 				</div>
 				</div>
@@ -535,6 +541,14 @@ function rolo_loop() { ?>
 }; // end rolo_loop
 
 
- 
+ function getSkypeStatus($username) {
+      
+    $data = file_get_contents('http://mystatus.skype.com/' . urlencode($username) . '.xml');
+   
+    $status = strpos($data, '<presence xml:lang="en">Offline</presence>') ? 'offline' : 'online';
+      
+  
+   	return $status;
+}
  
 ?>

@@ -957,6 +957,12 @@ font: 15px NeutonRegular, Arial,sans-serif;
 	background: url('img/logo35x35.png') no-repeat ;
 	width:35px;
 	color:transparent !important;}
+	
+.menu-item-175 a {
+	background: url('img/plus.png') no-repeat ;
+	width:auto;
+	margin-top:5px;
+	color:transparent !important;}
 
 .menu-item-126 a:hover {text-decoration: none !important; }
 
@@ -992,4 +998,10 @@ font: 15px NeutonRegular, Arial,sans-serif;
   }
 .info {
 	font-size:15px;
+}
+
+img.offline
+{
+opacity:0.4;
+filter:alpha(opacity=40); /* For IE8 and earlier */
 }
