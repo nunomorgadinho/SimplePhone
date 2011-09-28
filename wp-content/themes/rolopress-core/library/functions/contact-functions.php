@@ -82,6 +82,29 @@ function rolo_edit_contact() {
     }
 }
 
+function get_previous($frame){
+	
+	switch ($frame) {
+			case '1': $previous = 3;
+			break;
+			default: $previous=$frame-1;
+			break;
+		}
+		return $previous;
+}
+
+function get_next($frame){
+	
+	switch ($frame) {
+			case '3': $next = 1;
+			break;
+			default: $next=$frame+1;
+			break;
+		}
+		
+	return $next;
+}
+
 /**
  * Show the list of contact fields in edit contact page
  * 
@@ -105,13 +128,28 @@ function _rolo_show_edit_contact_form($contact_id) {
 <div id="addContact">
 		<div id="frameContainer">
 	<?php 	
+
 	// Get one of the nine frames possible
-	$frame_number = get_post_meta($contact_id, 'rolo_contact_framename', true);
+	$pframe  = get_post_meta($contact_id, 'rolo_contact_framename', true);
+	$i = $pframe[strlen($pframe)-1];
+	$previous = get_previous($i); 
+	$next = get_next($i);
+	
+	if (!empty($_GET['pframe']) && $_GET['pframe'] >0 && $_GET['pframe'] <4 )
+	{
+		$previous = get_previous($_GET['pframe']); 
+		$next = get_next($_GET['pframe']);
+		$pframe = 'frame'.$_GET['pframe']; 
+	}	
+	$frame_number = $pframe;
 	
 	global $_wp_additional_image_sizes;
 	
 	 $w = $_wp_additional_image_sizes[$frame_number]['width'];
 	 $h = $_wp_additional_image_sizes[$frame_number]['height'];
+	 
+	
+	 
 	?>
 	 	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script>
@@ -132,6 +170,9 @@ function _rolo_show_edit_contact_form($contact_id) {
 					<?php the_title();?>
 				</div>
 			</div>
+			<span class="info">Use as setas para escolher a moldura.</span><br/>
+			 <a id="change_frame_left"  href="?id=<?php echo $contact_id?>&pframe=<?php echo $previous;?>"><<</a>
+	 		<a  id="change_frame_right" href="?id=<?php echo $contact_id?>&pframe=<?php echo $next?>">>></a>
 		</div>	<!-- close div contact -->
 
 
@@ -231,24 +272,24 @@ function _rolo_show_contact_fields() {
     </div>
 
 	<div id="addContact">
-<!-- 	<div id="frameContainer" onmouseover="hover(this, event)" ondrop="drop(this, event)" ondragenter="return false" ondragover="return false"> -->
 		<div id="frameContainer">
 	<?php 
-	//dummy get gravatar image
-//	echo get_avatar ('',96, rolo_get_twitter_profile_image('', ROLOPRESS_IMAGES . "/icons/rolo-contact.jpg") );
 	
 	// Get one of the nine frames possible
 	$pframe  = 1;
-	$previous = 9;
+//	$previous = 9;
+	$previous = 3;
 	$next = 2;
-	if (!empty($_GET['pframe']) && $_GET['pframe'] >0 && $_GET['pframe'] <10 )
+	if (!empty($_GET['pframe']) && $_GET['pframe'] >0 && $_GET['pframe'] <4 )
 	{
 		$pframe = $_GET['pframe'];
 	
 		switch ($pframe) {
-			case 1: $next = 2; $previous = 9;
+	//		case 1: $next = 2; $previous = 9;
+			case 1: $next = 2; $previous = 3;
 			break;
-			case 9: $next = 1; $previous = 8;
+	//		case 9: $next = 1; $previous = 8;
+			case 3: $next = 1; $previous = 2;
 			break;
 			default: $next= $pframe+1; $previous=$pframe-1;
 			break;
@@ -259,22 +300,16 @@ function _rolo_show_contact_fields() {
 		
 	$src = get_bloginfo('template_url').'/library/images/frames/frame'.$frame_number.'.png';
 		
-	//list($w, $h) = getimagesize($src);
-	
-	// $sizes_custom = get_option('aisz_sizes');
 
 	global $_wp_additional_image_sizes;
 	
 	 $w = $_wp_additional_image_sizes['frame'.$frame_number]['width'];
 	 $h = $_wp_additional_image_sizes['frame'.$frame_number]['height'];
 	
-	 //$style = "background:url(".$srcimage.") no-repeat;";
 	?>
 	 	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script>
  
-
-
 	<div id="contact">		
 			<div class="photo" id="<?php echo 'frame'.$frame_number;?>">
 				<a href="<?php echo $link;?>">
@@ -302,7 +337,7 @@ function _rolo_show_contact_fields() {
                 
             },
             'complete' : function(r){
-                console.log('my complete',r);
+                //console.log('my complete',r);
                 jQuery("#filename").attr("value", r.filename);
             }
 
@@ -448,12 +483,12 @@ function _rolo_save_contact_fields() {
         update_post_meta($post_id, 'rolo_contact_filename' , $_POST['filename']);
         
         // ------------------------------------------
-        
+           
         if (!empty($_POST['filename']))
         {
         	// como ja fizemos o upload por ajax agora basta ir buscar as imagens ah directoria temp
-			$upload = wp_upload_bits($_POST['filename'], null, file_get_contents(ABSPATH."wp-content/themes/rolopress-core/library/includes/".$_POST['filename']));
-
+			$upload = wp_upload_bits($_POST['filename'], null, file_get_contents(ABSPATH."wp-content/themes/rolopress-core/library/includes/orig-".$_POST['filename']));
+			
 			//	print_r($upload);
 		
 	    	$type = '';

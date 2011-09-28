@@ -733,20 +733,27 @@ ol.notelist li .comment-reply-link a {
 /*Sizes for images inside frame*/
 .frame1
 {
+	/*top: 39px !important;
+	left: 36px !important;	*/
 	top: 39px !important;
-	left: 36px !important;	
+	left: 39px !important;
 }
 
 .frame2
 {
-	top: 31px !important;
-	left: 33px !important;	
+	/*top: 31px !important;
+	left: 33px !important;	*/
+	top: 15px !important;
+	left: 16px !important;
 }
 
 .frame3
 {
+	/*
 	left: 39px !important;
-	top: 32px !important;
+	top: 32px !important;*/
+	top: 34px !important;
+	left: 40px !important;	
 }
 
 .frame4
@@ -831,20 +838,26 @@ ol.notelist li .comment-reply-link a {
 /*Actual size of the frame*/
 #frame1
 {
+/*	width: 265px !important;
+	height: 337px !important;	*/
 	width: 265px !important;
 	height: 337px !important;	
 }
 
 #frame2
 {
+/*	width: 265px !important;
+	height: 292px !important;	*/
 	width: 265px !important;
-	height: 292px !important;	
+	height: 176px !important;	
 }
 
 #frame3
 {
+/*	width: 265px !important;
+	height: 232px !important;	*/
 	width: 265px !important;
-	height: 232px !important;	
+	height: 229px !important;	
 
 }
 
@@ -993,14 +1006,14 @@ font: 15px NeutonRegular, Arial,sans-serif;
  border: 4px ridge;
  padding: 2px;
  text-decoration: none;
- border-color:#ccc;
+ border-color:#c3c3c3;
  font-size:10px;
   }
 .info {
 	font-size:15px;
 }
 
-img.offline
+.offline img
 {
 opacity:0.4;
 filter:alpha(opacity=40); /* For IE8 and earlier */

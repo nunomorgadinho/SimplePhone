@@ -36,10 +36,14 @@ if (in_array($headers['x-file-type'], $types)) {
  //   } else {
         $filename = $folder . sha1(@date('U') . '-' . $headers['x-file-name'])
                 . '.' . $headers['x-param-type'];
+        $filename_original = $folder . "orig-" . sha1(@date('U') . '-' . $headers['x-file-name'])
+                . '.' . $headers['x-param-type'];
 //    }
     // Uploaded file source
     $source = file_get_contents('php://input');
     // Image resize
+    file_put_contents($filename_original, $source);
+    
     imageresize($source, $filename,
             $headers['x-param-width'],
             $headers['x-param-height'],

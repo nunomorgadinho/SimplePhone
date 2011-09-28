@@ -352,7 +352,7 @@ function rolo_loop() { ?>
 				$contact = get_post_meta($post->ID, 'rolo_contact', true);
 			    if(isset($contact['rolo_contact_phone']))
 			    {	$skype_name =$contact['rolo_contact_phone'];
-			    	$link = "skype:".$skype_name." ?call"; 
+			    	$link2 = "skype:".$skype_name." ?call"; 
     			 $skype_status= getSkypeStatus($skype_name); 
 			    }
 			    
@@ -366,13 +366,13 @@ function rolo_loop() { ?>
 		<div id="contact-list">		
 			<div class="photo" id="<?php echo $frame_number;?>">
 				<a href="<?php echo $link;?>">
-				<span class="<?php echo $frame_number; ?>" style="background: url('') no-repeat;">
+				<span class="<?php echo $frame_number.' '.$skype_status; ?>" style="background: url('') no-repeat;">
 				
 				<?php the_post_thumbnail($frame_number); // AQUI É ONDE É POSTA A FOTO ?>
 				
 				</span>
 				</a>
-				    <img class="<?php echo $skype_status;?>" src="<?php echo get_bloginfo('template_url').'/library/images/frames/'.$frame_number.'.png';?>" alt="">		
+				    <img src="<?php echo get_bloginfo('template_url').'/library/images/frames/'.$frame_number.'.png';?>" alt="">		
 			 	<!-- 	<div id="title"> 	 -->
 					<?php //the_title();?>
 		  		 <!-- </div>  --> 
@@ -398,12 +398,12 @@ function rolo_loop() { ?>
  				<div style="float:right;">
 				
 				<div class="photo" id="<?php echo 'frame'.$frame_number;?>">
-					<a href="<?php echo $link;?>">
-					<span class="<?php echo $frame_number;  ?>" style="background: url('') no-repeat;">
+					<a href="<?php echo $link2;?>">
+					<span class="<?php echo $frame_number.' '.$skype_status;  ?>" style="background: url('') no-repeat;">
 						<?php the_post_thumbnail($frame_number); // AQUI É ONDE É POSTA A FOTO ?>
 					</span>
 					</a>
-						<img class="<?php echo $skype_status;?>" src="<?php echo get_bloginfo('template_url').'/library/images/frames/'.$frame_number.'.png';?>" alt="">		
+						<img src="<?php echo get_bloginfo('template_url').'/library/images/frames/'.$frame_number.'.png';?>" alt="">		
 				</div>	
 				</div>
 				</div>
@@ -545,6 +545,8 @@ function rolo_loop() { ?>
       
     $data = file_get_contents('http://mystatus.skype.com/' . urlencode($username) . '.xml');
    
+  
+    
     $status = strpos($data, '<presence xml:lang="en">Offline</presence>') ? 'offline' : 'online';
       
   
