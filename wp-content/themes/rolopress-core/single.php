@@ -59,8 +59,17 @@
    		
    		});
 	   
-   }, 15000);
+   }, 60000);
     	
     
   });
 </script> 
+
+
+
+<script >
+	jQuery(function() {
+		jQuery( ".wp-post-image" ).draggable();
+	});
+</script>
+
