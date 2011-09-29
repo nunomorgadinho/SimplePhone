@@ -63,7 +63,7 @@ function rolo_type_tax_message() { ?>
  */
 function rolo_404_message() { ?>
 	<p>
-	<?php _e( 'Apologies, but we were unable to find what you were looking for. Perhaps searching will help.', 'rolopress' ); ?></p>
+	<?php _e( 'Esse nome ainda não está na sua agenda.', 'rolopress' ); ?></p>
 	<?php get_search_form();
 }
 
