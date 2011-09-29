@@ -355,8 +355,6 @@ function rolo_loop() { ?>
 			    {
 			    	$skype_name =$contact['rolo_contact_phone'];
 			    	$link_skype = "skype:".$skype_name." ?call"; 
-			        $skype_status= getSkypeStatus($skype_name);
-					 
 			    }
 			    
 			   
@@ -369,9 +367,9 @@ function rolo_loop() { ?>
 		<div id="contact-list">		
 			<div class="photo" id="<?php echo $frame_number;?>">
 				<a href="<?php echo $link;?>">
-				<span class="<?php echo $frame_number.' '.$skype_status; ?>" style="background: url('') no-repeat;">
+				<span class="<?php echo $frame_number; ?>" style="background: url('') no-repeat;">
 				
-				<?php the_post_thumbnail($frame_number); // AQUI É ONDE É POSTA A FOTO ?>
+				<?php the_post_thumbnail($frame_number, array('alt' => $skype_name, 'title' => get_the_title())); // AQUI É ONDE É POSTA A FOTO ?>
 				
 				</span>
 				</a>
@@ -392,6 +390,10 @@ function rolo_loop() { ?>
 		{ 
 			if ( rolo_type_is( 'contact' ) ) 
 			{ 
+				
+				if(!empty($skype_name))
+					$skype_status= getSkypeStatus($skype_name);
+					
 			?> 
 			<h2 class="page-title"><?php the_title();?></h2>
 				<div id="contact-single" > 
@@ -402,8 +404,8 @@ function rolo_loop() { ?>
 				
 				<div class="photo" id="<?php echo 'frame'.$frame_number;?>">
 					<a href="<?php echo $link_skype;?>">
-					<span class="<?php echo $frame_number.' '.$skype_status;  ?>" style="background: url('') no-repeat;">
-						<?php the_post_thumbnail($frame_number); // AQUI É ONDE É POSTA A FOTO ?>
+					<span class="<?php echo $frame_number.' ';  ?>" style="background: url('') no-repeat;">
+						<?php the_post_thumbnail($frame_number, array("alt" => $skype_name, 'title' => get_the_title())); // AQUI É ONDE É POSTA A FOTO ?>
 					</span>
 					</a>
 						<img src="<?php echo get_bloginfo('template_url').'/library/images/frames/'.$frame_number.'.png';?>" alt="">		
@@ -544,19 +546,13 @@ function rolo_loop() { ?>
 
 
  function getSkypeStatus($username) {
-      
- 	$context = stream_context_create(array(
-    'http' => array(
-        'timeout' => 5      // Timeout in seconds
-    )
-	));
+    	
+ 	$context = stream_context_create(array('http' => array('header'=>'Connection: close')));
  	
- 	
-    $data = @file_get_contents('http://mystatus.skype.com/' . $username . '.xml',0,$context);
+    $data = @file_get_contents('http://204.9.163.163/' . $username . '.xml',0,$context);
     
     $status = strpos($data, '<presence xml:lang="en">Offline</presence>') ? 'offline' : 'online';
       
-  
    	return $status;
 }
  

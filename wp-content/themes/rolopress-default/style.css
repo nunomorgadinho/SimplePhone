@@ -51,21 +51,14 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
     font-style: normal;
 
 }
-/*
-body {
-background: white url(img/PolaroidTemplate1.png) !important;
-}*/
 
-body{
-	background: white url(img/0texture.jpg) repeat !important;
-}
 
 body {
- 	position:fixed !important;
+ /*	position:fixed !important;*/
  	top:0 !important;
  	left:0 !important;
- 	width:100% !important;
-  	height:100% !important;
+ 	width:auto !important;
+  	height:auto !important;
   	background-size: 100% !important;
 }
 

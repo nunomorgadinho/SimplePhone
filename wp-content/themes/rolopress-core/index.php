@@ -34,6 +34,39 @@
       columnWidth: 100,
       isAnimated: true
     });
+
+	/*Criar array com skypename de cada frame*/
+    var refs = [];
+    var skypenames = [];
+	jQuery.each(jQuery('.photo img.wp-post-image'), function() {
+		refs.push(jQuery(this));
+		skypenames.push(jQuery(this).attr('alt'));
+	});
+
+	console.log(skypenames);
+	
+   setInterval(function() {
+
+	   jQuery.post( '/wp-content/themes/rolopress-core/library/includes/checkstatus.php', { usernames: skypenames }, function( data ) {
+			
+			data = eval(data);
+			console.log('data = ' + data);
+			console.log('refs = ' + refs);
+			for (var i=0; i < refs.length; i++)
+			{
+				console.log('datai = '+data[i]);
+				if (data[i] == "offline") 
+				{
+					refs[i].fadeTo('slow',0.5);
+				} else {
+					refs[i].fadeTo('slow',1);
+				}
+			}
+   		
+   		});
+	   
+   }, 15000);
+    	
     
   });
 </script> 
