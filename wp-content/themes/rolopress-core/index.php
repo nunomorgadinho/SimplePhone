@@ -45,6 +45,20 @@
 
 	console.log(skypenames);
 	
+	/*First*/
+	 jQuery.post( '/wp-content/themes/rolopress-core/library/includes/checkstatus.php', { usernames: skypenames }, function( data ) {
+		 data = eval(data);
+		 for (var i=0; i < refs.length; i++)
+		{ 
+			 if (data[i] == "offline") 
+			{
+				refs[i].fadeTo('slow',0.5);
+			} 
+		}
+	});
+	
+	
+	/*Keep repeting*/
    setInterval(function() {
 
 	   jQuery.post( '/wp-content/themes/rolopress-core/library/includes/checkstatus.php', { usernames: skypenames }, function( data ) {
@@ -65,7 +79,7 @@
    		
    		});
 	   
-   }, 15000);
+   }, 60000);
     	
     
   });
