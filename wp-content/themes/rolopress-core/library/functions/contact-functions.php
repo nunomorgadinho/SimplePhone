@@ -176,10 +176,10 @@ function _rolo_show_edit_contact_form($contact_id) {
 		</div>	<!-- close div contact -->
 
 
-	<script src="http://simplephone.com/wp-content/themes/rolopress-core/library/js/droparea.js" type="text/javascript"></script>
+	<script src="http://simplephone.me/wp-content/themes/rolopress-core/library/js/droparea.js" type="text/javascript"></script>
 	<script>
 		jQuery('.droparea').droparea({
-			'post' : 'http://simplephone.com/wp-content/themes/rolopress-core/library/includes/upload.php',
+			'post' : 'http://simplephone.me/wp-content/themes/rolopress-core/library/includes/upload.php',
             'init' : function(r){
                 //console.log('my init',r);
             },
@@ -323,10 +323,10 @@ function _rolo_show_contact_fields() {
 		</div>	<!-- close div contact -->
 		
 
-	<script src="http://simplephone.com/wp-content/themes/rolopress-core/library/js/droparea.js" type="text/javascript"></script>
+	<script src="http://simplephone.me/wp-content/themes/rolopress-core/library/js/droparea.js" type="text/javascript"></script>
 	<script>
 		jQuery('.droparea').droparea({
-			'post' : 'http://simplephone.com/wp-content/themes/rolopress-core/library/includes/upload.php',
+			'post' : 'http://simplephone.me/wp-content/themes/rolopress-core/library/includes/upload.php',
             'init' : function(r){
                 
             },

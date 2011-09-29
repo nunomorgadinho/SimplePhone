@@ -1,18 +1,34 @@
 <?php
 
+if (!function_exists('getallheaders'))
+{
+  function getallheaders()
+  {
+    foreach ($_SERVER as $name => $value)
+    {
+      if (substr($name, 0, 5) == 'HTTP_')
+      {
+         $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+      }
+    }
+    return $headers;
+  }
+}
+
 // Maximum file size
 $maxsize = 1024; //Kb
 // Supporting image file types
 $types = Array('image/png', 'image/gif', 'image/jpeg');
 
-$headers = getallheaders();
+//print_r($_SERVER);
+//$headers = getallheaders();
 
 // LOG
-$log = '=== ' . @date('Y-m-d H:i:s') . ' ===============================' . "\n"
-        . 'HEADERS:' . print_r($headers, 1) . "\n";
-$fp = fopen('log.txt', 'a');
-fwrite($fp, $log);
-fclose($fp);
+//$log = '=== ' . @date('Y-m-d H:i:s') . ' ===============================' . "\n"
+  //      . 'HEADERS:' . print_r($headers, 1) . "\n";
+//$fp = fopen('log.txt', 'a');
+//fwrite($fp, $log);
+//fclose($fp);
 
 // Result object
 $r = new stdClass();
@@ -20,24 +36,25 @@ $r = new stdClass();
 header('content-type: application/json');
 
 // File size control
-if ($headers['x-file-size'] > ($maxsize * 1024)) {
+if ($_SERVER['HTTP_X_FILE_SIZE'] > ($maxsize * 1024)) {
     $r->error = "Max file size: $maxsize Kb";
 }
 
-$folder =''; //$headers['x-param-folder'] ? $headers['x-param-folder'] . '/' : '';
+$folder ='files/'; //$headers['x-param-folder'] ? $headers['x-param-folder'] . '/' : '';
 if ($folder && !is_dir($folder))
     mkdir($folder);
 
 // File type control
-if (in_array($headers['x-file-type'], $types)) {
+if (in_array($_SERVER['HTTP_X_FILE_TYPE'], $types)) {
     // Create an unique file name    
  //   if ($headers['x-param-value']) {
  //       $filename = $folder . $headers['x-param-value'];
  //   } else {
-        $filename = $folder . sha1(@date('U') . '-' . $headers['x-file-name'])
-                . '.' . $headers['x-param-type'];
-        $filename_original = $folder . "orig-" . sha1(@date('U') . '-' . $headers['x-file-name'])
-                . '.' . $headers['x-param-type'];
+
+        $filename = $folder . sha1(@date('U') . '-' . $_SERVER['HTTP_X_FILE_NAME'])
+                . '.' . $_SERVER['HTTP_X_PARAM_TYPE'];
+        $filename_original = $folder . "orig-" . sha1(@date('U') . '-' . $_SERVER['HTTP_X_FILE_NAME'])
+                . '.' . $_SERVER['HTTP_X_PARAM_TYPE'];
 //    }
     // Uploaded file source
     $source = file_get_contents('php://input');
@@ -45,12 +62,12 @@ if (in_array($headers['x-file-type'], $types)) {
     file_put_contents($filename_original, $source);
     
     imageresize($source, $filename,
-            $headers['x-param-width'],
-            $headers['x-param-height'],
-            $headers['x-param-crop'],
+            $_SERVER['HTTP_X_PARAM_WIDTH'],
+            $_SERVER['HTTP_X_PARAM_HEIGHT'],
+            $_SERVER['HTTP_X_PARAM_CROP'],
             60);
 } else
-    $r->error = "Unsupported file type: " . $headers['x-file-type'];
+    $r->error = "Unsupported file type: " . $_SERVER['HTTP_X_FILE_TYPE'];
 
 // File path
 $path = str_replace('upload.php', '', $_SERVER['SCRIPT_NAME']);

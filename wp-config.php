@@ -16,13 +16,13 @@
 
 // ** Definições de MySQL - obtenha estes dados do seu serviço de alojamento** //
 /** O nome da base de dados do WordPress */
-define('DB_NAME', 'simplephone');
+define('DB_NAME', 'tiratema_simplephone');
 
 /** O nome do utilizador de MySQL */
-define('DB_USER', 'root');
+define('DB_USER', 'tiratema_sphone');
 
 /** A password do utilizador de MySQL  */
-define('DB_PASSWORD', 'xpto123');
+define('DB_PASSWORD', 'X7Hl7OU2xG');
 
 /** O nome do serviddor de  MySQL  */
 define('DB_HOST', '127.0.0.1');
