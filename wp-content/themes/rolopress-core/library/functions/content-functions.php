@@ -357,15 +357,16 @@ function rolo_loop() { ?>
 			    	$link_skype = "skype:".$skype_name." ?call"; 
 			    }
 			    
-			   
+			   	$importance = get_post_meta($post->ID, 'rolo_contact_importance', true);
 			}	
 			
 		if ( (is_archive() || is_home())) 
 		{
 				
 		?>
+		
 		<div id="contact-list">		
-			<div class="photo" id="<?php echo $frame_number;?>">
+			<div class="photo" id="<?php echo $frame_number;?>">			
 				<a href="<?php echo $link;?>">
 				<span class="<?php echo $frame_number; ?>" style="background: url('') no-repeat;">
 				
@@ -402,7 +403,7 @@ function rolo_loop() { ?>
 				
  				<div style="float:right;">
 				
-				<div class="photo" id="<?php echo 'frame'.$frame_number;?>">
+				<div class="photo" id="<?php echo $frame_number;?>">
 					<a href="<?php echo $link_skype;?>">
 					<span class="<?php echo $frame_number.' ';  ?>" style="background: url('') no-repeat;">
 						<?php the_post_thumbnail($frame_number, array("alt" => $skype_name, 'title' => get_the_title())); // AQUI É ONDE É POSTA A FOTO ?>

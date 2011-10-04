@@ -131,16 +131,36 @@ function _rolo_show_edit_contact_form($contact_id) {
 
 	// Get one of the nine frames possible
 	$pframe  = get_post_meta($contact_id, 'rolo_contact_framename', true);
-	$i = $pframe[strlen($pframe)-1];
+	$importance = $pframe[strlen($pframe)-1];
+	$i = $pframe[strlen($pframe)-2];
+
 	$previous = get_previous($i); 
 	$next = get_next($i);
+	
+	$previous_imp = get_previous($importance);
+	$next_imp = get_next($importance);;
+	
+	if (!empty($_GET['imp']) && $_GET['imp'] >0 && $_GET['imp'] < 4 )
+	{
+		$importance = $_GET['imp'];
+		
+		switch ($importance) {
+			case 1: $next_imp = 2; $previous_imp = 3;
+			break;
+			case 3: $next_imp = 1; $previous_imp = 2;
+			break;
+			default: $next_imp= $importance+1; $previous_imp=$importance-1;
+			break;
+		}
+	}
 	
 	if (!empty($_GET['pframe']) && $_GET['pframe'] >0 && $_GET['pframe'] <4 )
 	{
 		$previous = get_previous($_GET['pframe']); 
 		$next = get_next($_GET['pframe']);
-		$pframe = 'frame'.$_GET['pframe']; 
+		$pframe = 'frame'.$_GET['pframe'].$importance; 
 	}	
+	
 	$frame_number = $pframe;
 	
 	global $_wp_additional_image_sizes;
@@ -148,7 +168,7 @@ function _rolo_show_edit_contact_form($contact_id) {
 	 $w = $_wp_additional_image_sizes[$frame_number]['width'];
 	 $h = $_wp_additional_image_sizes[$frame_number]['height'];
 	 
-	
+	$current_pframe = $pframe[strlen($pframe)-2];
 	 
 	?>
 	 	
@@ -173,6 +193,17 @@ function _rolo_show_edit_contact_form($contact_id) {
 			<span class="info">Use as setas para escolher a moldura.</span><br/>
 			 <a id="change_frame_left"  href="?id=<?php echo $contact_id?>&pframe=<?php echo $previous;?>"><<</a>
 	 		<a  id="change_frame_right" href="?id=<?php echo $contact_id?>&pframe=<?php echo $next?>">>></a>
+	 		
+	 	<br/>
+	 		<span class="info">O quão importante é para si este contacto?</span><br/>
+	 		<?php if ($importance != 1) { ?>
+				 <a id="change_frame_left"  href="?id=<?php echo $contact_id?>&pframe=<?php echo $current_pframe;?>&imp=<?php echo $previous_imp;?>">-</a>
+			<?php } ?>
+			
+			<?php if ($importance != 3) { ?>
+	 			<a  id="change_frame_right" href="?id=<?php echo $contact_id?>&pframe=<?php echo $current_pframe; ?>&imp=<?php echo $next_imp;?>">+</a>
+	 		<?php } ?>
+	 		
 		</div>	<!-- close div contact -->
 
 
@@ -275,20 +306,35 @@ function _rolo_show_contact_fields() {
 		<div id="frameContainer">
 	<?php 
 	
-	// Get one of the nine frames possible
-	$pframe  = 1;
-//	$previous = 9;
+	// Get one of the possible frames
+	$pframe  = rand(1,3);
+	$importance = 1;
+	$previous_imp = 3;
+	$next_imp = 2;
 	$previous = 3;
 	$next = 2;
+	
+	if (!empty($_GET['imp']) && $_GET['imp'] >0 && $_GET['imp'] < 4 )
+	{
+		$importance = $_GET['imp'];
+		
+		switch ($importance) {
+			case 1: $next_imp = 2; $previous_imp = 3;
+			break;
+			case 3: $next_imp = 1; $previous_imp = 2;
+			break;
+			default: $next_imp= $importance+1; $previous_imp=$importance-1;
+			break;
+		}
+	}
+	
 	if (!empty($_GET['pframe']) && $_GET['pframe'] >0 && $_GET['pframe'] <4 )
 	{
 		$pframe = $_GET['pframe'];
 	
 		switch ($pframe) {
-	//		case 1: $next = 2; $previous = 9;
 			case 1: $next = 2; $previous = 3;
 			break;
-	//		case 9: $next = 1; $previous = 8;
 			case 3: $next = 1; $previous = 2;
 			break;
 			default: $next= $pframe+1; $previous=$pframe-1;
@@ -298,28 +344,38 @@ function _rolo_show_contact_fields() {
 
 	$frame_number = $pframe;
 		
-	$src = get_bloginfo('template_url').'/library/images/frames/frame'.$frame_number.'.png';
+	$src = get_bloginfo('template_url').'/library/images/frames/frame'.$frame_number.$importance.'.png';
 		
 
 	global $_wp_additional_image_sizes;
 	
-	 $w = $_wp_additional_image_sizes['frame'.$frame_number]['width'];
-	 $h = $_wp_additional_image_sizes['frame'.$frame_number]['height'];
+	 $w = $_wp_additional_image_sizes['frame'.$frame_number.$importance]['width'];
+	 $h = $_wp_additional_image_sizes['frame'.$frame_number.$importance]['height'];
 	
 	?>
 	 	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script>
  
 	<div id="contact">		
-			<div class="photo" id="<?php echo 'frame'.$frame_number;?>">
+			<div class="photo" id="<?php echo 'frame'.$frame_number.$importance;?>">
 				<a href="<?php echo $link;?>">
-				<span class="droparea spot frame<?php echo $frame_number; ?>" data-width="<?php echo $w; ?>" data-height="<?php echo $h; ?>" data-type="jpg" data-crop="true" style="background: url('') no-repeat;"></span>
+				<span class="droparea spot frame<?php echo $frame_number.$importance; ?>" data-width="<?php echo $w; ?>" data-height="<?php echo $h; ?>" data-type="jpg" data-crop="true" style="background: url('') no-repeat;"></span>
 				</a>
 				 	<img src="<?php echo $src; ?>" alt=""> 
 			</div>
 			<span class="info">Use as setas para escolher a moldura.</span><br/>
 		 <a id="change_frame_left"  href="?pframe=<?php echo $previous;?>"><<</a>
 	 	<a  id="change_frame_right" href="?pframe=<?php echo $next?>">>></a>
+	 	<br/>
+	 		<span class="info">O quão importante é para si este contacto?</span><br/>
+	 		<?php if ($importance != 1) { ?>
+				 <a id="change_frame_left"  href="?pframe=<?php echo $pframe;?>&imp=<?php echo $previous_imp;?>">-</a>
+			<?php } ?>
+			
+			<?php if ($importance != 3) { ?>
+	 			<a  id="change_frame_right" href="?pframe=<?php echo $pframe; ?>&imp=<?php echo $next_imp;?>">+</a>
+	 		<?php } ?>
+	 		
 		</div>	<!-- close div contact -->
 		
 
@@ -400,7 +456,7 @@ function _rolo_show_contact_fields() {
 ?>
     </fieldset>
        <div class="buttonHolder">
-      <input type="hidden" id="framename" name="framename" value="frame<?php echo $frame_number; ?>" />
+      <input type="hidden" id="framename" name="framename" value="frame<?php echo $frame_number.$importance; ?>" />
    	  <input type="hidden" id="filename" name="filename" value="" />
       <input type="hidden" name="rp_add_contact" value="add_contact" />
       <button type="submit" name="submit" id="add_contact" class="submitButton" tabindex="<?php echo $rolo_tab_index++;?>" ><?php _e('Adicionar Contacto', 'rolopress');?></button>
@@ -525,6 +581,9 @@ function _rolo_save_contact_fields() {
         // frame
         update_post_meta($post_id, 'rolo_contact_framename' , $_POST['framename']);
 
+        // importance
+        update_post_meta($post_id, 'rolo_contact_importance' , $_POST['importance']);
+        
         // Set the custom taxonmy for the post
         wp_set_post_terms($post_id, 'Contact', 'type');
     } else {
