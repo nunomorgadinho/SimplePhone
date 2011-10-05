@@ -719,8 +719,8 @@ ol.notelist li .comment-reply-link a {
 
 .droparea { 
 /*	border:1px solid red;*/
-	width:460px;
-	height:345px;
+/*	width:460px;
+	height:345px;*/
 }
 
 /*Sizes for images inside frame*/
@@ -845,7 +845,7 @@ ol.notelist li .comment-reply-link a {
 
 input{font-family:NeutonRegular !important;}
 .submitButton {float:left; margin-left:30%; font-family:NeutonRegular;font-size:20px;}
-.instructions{margin-top:25px; margin-right:3px; margin-left:3px; font-size:15px;}
+.instructions{margin-top:0; margin-right:3px; margin-left:3px; font-size:15px;}
 
 #container, #menu{font-family:NeutonRegular;}
 #menu{font-size:15px;}

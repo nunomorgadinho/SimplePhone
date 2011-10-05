@@ -359,7 +359,7 @@ function _rolo_show_contact_fields() {
 	<div id="contact">		
 			<div class="photo" id="<?php echo 'frame'.$frame_number.$importance;?>">
 				<a href="<?php echo $link;?>">
-				<span class="droparea spot frame<?php echo $frame_number.$importance; ?>" data-width="<?php echo $w; ?>" data-height="<?php echo $h; ?>" data-type="jpg" data-crop="true" style="background: url('') no-repeat;"></span>
+				<span class="droparea spot frame<?php echo $frame_number.$importance; ?>" data-width="<?php echo $w; ?>" data-height="<?php echo $h; ?>" data-type="jpg" data-crop="true" style="width: <?php echo $w; ?>px; height: <?php echo $h; ?>px"></span>
 				</a>
 				 	<img src="<?php echo $src; ?>" alt=""> 
 			</div>
