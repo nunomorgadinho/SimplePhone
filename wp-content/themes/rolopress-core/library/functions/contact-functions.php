@@ -196,17 +196,25 @@ function _rolo_show_edit_contact_form($contact_id) {
 				</div>
 			</div>
 			<span class="info">Use as setas para escolher a moldura.</span><br/>
-			 <a id="change_frame_left"  href="?id=<?php echo $contact_id?>&pframe=<?php echo $previous;?>"><<</a>
-	 		<a  id="change_frame_right" href="?id=<?php echo $contact_id?>&pframe=<?php echo $next?>">>></a>
+			 <a id="change_frame_left"  href="?id=<?php echo $contact_id?>&pframe=<?php echo $previous;?>">
+			 <img src="<?php echo get_bloginfo('stylesheet_directory'); ?>/img/esquerda.png">
+			 </a>
+	 		<a  id="change_frame_right" href="?id=<?php echo $contact_id?>&pframe=<?php echo $next?>">
+	 		<img src="<?php echo get_bloginfo('stylesheet_directory'); ?>/img/direita.png">
+	 		</a>
 	 		
 	 	<br/>
 	 		<span class="info">O quão importante é para si este contacto?</span><br/>
 	 		<?php if ($importance != 1) { ?>
-				 <a id="change_frame_left"  href="?id=<?php echo $contact_id?>&pframe=<?php echo $current_pframe;?>&imp=<?php echo $previous_imp;?>">-</a>
+				 <a id="change_frame_left"  href="?id=<?php echo $contact_id?>&pframe=<?php echo $current_pframe;?>&imp=<?php echo $previous_imp;?>">
+				 	 		<img src="<?php echo get_bloginfo('stylesheet_directory'); ?>/img/minus.png">
+				 </a>
 			<?php } ?>
 			
 			<?php if ($importance != 3) { ?>
-	 			<a  id="change_frame_right" href="?id=<?php echo $contact_id?>&pframe=<?php echo $current_pframe; ?>&imp=<?php echo $next_imp;?>">+</a>
+	 			<a  id="change_frame_right" href="?id=<?php echo $contact_id?>&pframe=<?php echo $current_pframe; ?>&imp=<?php echo $next_imp;?>">
+	 				 		<img src="<?php echo get_bloginfo('stylesheet_directory'); ?>/img/plus_s.png">
+	 			</a>
 	 		<?php } ?>
 	 		
 		</div>	<!-- close div contact -->
@@ -369,16 +377,24 @@ function _rolo_show_contact_fields() {
 				 	<img src="<?php echo $src; ?>" alt=""> 
 			</div>
 			<span class="info">Use as setas para escolher a moldura.</span><br/>
-		 <a id="change_frame_left"  href="?pframe=<?php echo $previous;?>"><<</a>
-	 	<a  id="change_frame_right" href="?pframe=<?php echo $next?>">>></a>
+		 <a id="change_frame_left"  href="?pframe=<?php echo $previous;?>">
+		 	 		<img src="<?php echo get_bloginfo('stylesheet_directory'); ?>/img/esquerda.png">
+		 </a>
+	 	<a  id="change_frame_right" href="?pframe=<?php echo $next?>">
+	 		 		<img src="<?php echo get_bloginfo('stylesheet_directory'); ?>/img/direita.png">
+	 	</a>
 	 	<br/>
 	 		<span class="info">O quão importante é para si este contacto?</span><br/>
 	 		<?php if ($importance != 1) { ?>
-				 <a id="change_frame_left"  href="?pframe=<?php echo $pframe;?>&imp=<?php echo $previous_imp;?>">-</a>
+				 <a id="change_frame_left"  href="?pframe=<?php echo $pframe;?>&imp=<?php echo $previous_imp;?>">
+				 	 		<img src="<?php echo get_bloginfo('stylesheet_directory'); ?>/img/minus.png">
+				 </a>
 			<?php } ?>
 			
 			<?php if ($importance != 3) { ?>
-	 			<a  id="change_frame_right" href="?pframe=<?php echo $pframe; ?>&imp=<?php echo $next_imp;?>">+</a>
+	 			<a  id="change_frame_right" href="?pframe=<?php echo $pframe; ?>&imp=<?php echo $next_imp;?>">
+	 				 		<img src="<?php echo get_bloginfo('stylesheet_directory'); ?>/img/plus_s.png">
+	 			</a>
 	 		<?php } ?>
 	 		
 		</div>	<!-- close div contact -->

@@ -893,14 +893,16 @@ font: 15px NeutonRegular, Arial,sans-serif;
 
 
 
-#change_frame_right , #change_frame_left 
+#change_frame_right:hover
 {
- border: 4px ridge;
- padding: 2px;
- text-decoration: none;
- border-color:#c3c3c3;
- font-size:10px;
-  }
+	text-decoration: none;
+}
+
+#change_frame_left:hover
+{
+	text-decoration: none;
+}
+
 .info {
 	font-size:15px;
 }
