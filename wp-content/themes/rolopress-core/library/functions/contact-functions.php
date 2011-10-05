@@ -207,10 +207,10 @@ function _rolo_show_edit_contact_form($contact_id) {
 		</div>	<!-- close div contact -->
 
 
-	<script src="http://simplephone.com/wp-content/themes/rolopress-core/library/js/droparea.js" type="text/javascript"></script>
+	<script src="http://simplephone.me/wp-content/themes/rolopress-core/library/js/droparea.js" type="text/javascript"></script>
 	<script>
 		jQuery('.droparea').droparea({
-			'post' : 'http://simplephone.com/wp-content/themes/rolopress-core/library/includes/upload.php',
+			'post' : 'http://simplephone.me/wp-content/themes/rolopress-core/library/includes/upload.php',
             'init' : function(r){
                 //console.log('my init',r);
             },
@@ -222,7 +222,7 @@ function _rolo_show_edit_contact_form($contact_id) {
             },
             'complete' : function(r){
                 console.log('my complete',r);
-                jQuery("#filename").attr("value", r.filename);
+                jQuery("#filename").attr("value", r.filename_original);
             }
 
 		});
@@ -280,7 +280,7 @@ function _rolo_show_edit_contact_form($contact_id) {
    <div class="buttonHolder">
       <input type="hidden" name="contact_id" value="<?php echo $contact_id;?>" />
       <input type="hidden" id="framename" name="framename" value="<?php echo $frame_number; ?>" />
-   	  <input type="hidden" id="filename" name="filename" value="" />
+      <input type="hidden" id="filename" name="filename" value="" />
       <input type="hidden" name="rp_edit_contact" value="edit_contact" />
       <button type="submit" name="submit" id="edit_contact" class="submitButton" tabindex="<?php echo $rolo_tab_index++;?>" ><?php _e('Editar Contacto', 'rolopress');?></button>
    </div>
@@ -379,10 +379,10 @@ function _rolo_show_contact_fields() {
 		</div>	<!-- close div contact -->
 		
 
-	<script src="http://simplephone.com/wp-content/themes/rolopress-core/library/js/droparea.js" type="text/javascript"></script>
+	<script src="http://simplephone.me/wp-content/themes/rolopress-core/library/js/droparea.js" type="text/javascript"></script>
 	<script>
 		jQuery('.droparea').droparea({
-			'post' : 'http://simplephone.com/wp-content/themes/rolopress-core/library/includes/upload.php',
+			'post' : 'http://simplephone.me/wp-content/themes/rolopress-core/library/includes/upload.php',
             'init' : function(r){
                 
             },
@@ -394,7 +394,7 @@ function _rolo_show_contact_fields() {
             },
             'complete' : function(r){
                 //console.log('my complete',r);
-                jQuery("#filename").attr("value", r.filename);
+                jQuery("#filename").attr("value", r.filename_original);
             }
 
 		});
@@ -543,7 +543,7 @@ function _rolo_save_contact_fields() {
         if (!empty($_POST['filename']))
         {
         	// como ja fizemos o upload por ajax agora basta ir buscar as imagens ah directoria temp
-			$upload = wp_upload_bits($_POST['filename'], null, file_get_contents(ABSPATH."wp-content/themes/rolopress-core/library/includes/orig-".$_POST['filename']));
+			$upload = wp_upload_bits($_POST['filename'], null, file_get_contents(ABSPATH."wp-content/themes/rolopress-core/library/includes/".$_POST['filename']));
 			
 			//	print_r($upload);
 		

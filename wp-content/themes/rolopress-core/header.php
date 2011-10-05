@@ -51,4 +51,5 @@
 				
 		</div><!-- #masthead -->	
 	</div><!-- #header -->
+
 	<?php rolopress_after_header(); ?>  
