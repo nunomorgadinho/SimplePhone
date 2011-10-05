@@ -23,8 +23,11 @@ function rolo_add_contact() {
         if (isset($_POST['rp_add_contact']) && $_POST['rp_add_contact'] == 'add_contact') {
             $contact_id = _rolo_save_contact_fields();
             if ($contact_id) { 
-                echo __("Contacto adicionado com sucesso.", 'rolopress'); 
+               // echo __("Contacto adicionado com sucesso.", 'rolopress'); 
+               $location = get_bloginfo('siteurl');
+                echo "<script type='text/javascript'>window.location = '".$location."';</script>";
                 
+                //header("Location: $location", true, 301);
             } else { 
                 echo __("Ocorreu um erro ao inserir o contacto, por favor tente novamente.", 'rolopress');
                   _rolo_show_contact_fields(); 
@@ -62,7 +65,9 @@ function rolo_edit_contact() {
         if (isset($_POST['rp_edit_contact']) && $_POST['rp_edit_contact'] == 'edit_contact') {
             $contact_id = _rolo_save_contact_fields();
             if ($contact_id) {
-                echo __("Contacto editado com sucesso.", 'rolopress');
+               // echo __("Contacto editado com sucesso.", 'rolopress');
+                $location = get_bloginfo('siteurl');
+                echo "<script type='text/javascript'>window.location = '".$location."';</script>";
             } else {
                 echo __("Ocorreu um erro ao editar o contacto", 'rolopress');
     //            TODO - Handle Error properly
@@ -178,7 +183,7 @@ function _rolo_show_edit_contact_form($contact_id) {
 			<div class="photo" id="<?php echo $frame_number;?>">
 				<a href="<?php echo $link;?>">
 				
-				<span class="droparea spot <?php echo $frame_number; ?>" data-width="<?php echo $w; ?>" data-height="<?php echo $h; ?>" data-type="jpg" data-crop="true" style="background: url('') no-repeat;"></span>
+				<span class="droparea spot <?php echo $frame_number; ?>" data-width="<?php echo $w; ?>" data-height="<?php echo $h; ?>" data-type="jpg" data-crop="true" style="width: <?php echo $w; ?>px; height: <?php echo $h; ?>px"></span>
 
 				<span class="<?php echo $frame_number; ?>" style="z-index: -100;">
 				<?php echo get_the_post_thumbnail( $contact_id, $frame_number ); // AQUI É ONDE É POSTA A FOTO ?>
