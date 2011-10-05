@@ -65,11 +65,3 @@
   });
 </script> 
 
-
-
-<script >
-	jQuery(function() {
-		jQuery( ".wp-post-image" ).draggable();
-	});
-</script>
-

@@ -31,7 +31,7 @@ li {
 }
 #menu {
     height: 36px;
-    background: #464646;
+  /*  background: #464646; */
     padding:5px 15px;
 }
 #menu ul {

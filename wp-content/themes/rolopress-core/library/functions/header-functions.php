@@ -136,9 +136,9 @@ add_action('rolopress_before_wrapper', 'rolopress_default_top_menu');
 function rolopress_default_top_menu_right() { ?>
 
         <ul class="menu_item sub_menu alignright default_menu">
-         <li id="logout"><?php $siteurl = get_bloginfo('siteurl');
+     <!--     <li id="logout"><?php $siteurl = get_bloginfo('siteurl');
             		  if(get_current_user_id() ==0) wp_register(); wp_loginout($siteurl);?>
-           </li>
+           </li>  -->
        
         
             <li>

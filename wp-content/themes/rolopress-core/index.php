@@ -22,66 +22,7 @@
 	<?php rolopress_after_container(); // After container hook ?>
 
 <?php //get_sidebar(); ?>	
-<?php //get_footer(); ?>
 
-<script src="http://masonry.desandro.com/js/jquery-1.6.2.min.js"></script> 
-<script src="http://masonry.desandro.com/jquery.masonry.min.js"></script> 
-<script> 
-  jQuery(function(){
-    
-    jQuery('#container').masonry({
-      itemSelector: '.photo',
-      columnWidth: 100,
-      isAnimated: true
-    });
+<?php get_footer(); ?>
 
-	/*Criar array com skypename de cada frame*/
-    var refs = [];
-    var skypenames = [];
-	jQuery.each(jQuery('.photo img.wp-post-image'), function() {
-		refs.push(jQuery(this));
-		skypenames.push(jQuery(this).attr('alt'));
-	});
-
-	console.log(skypenames);
-	
-	/*First*/
-	 jQuery.post( '/wp-content/themes/rolopress-core/library/includes/checkstatus.php', { usernames: skypenames }, function( data ) {
-		 data = eval(data);
-		 for (var i=0; i < refs.length; i++)
-		{ 
-			 if (data[i] == "offline") 
-			{
-				refs[i].fadeTo('slow',0.5);
-			} 
-		}
-	});
-	
-	
-	/*Keep repeting*/
-   setInterval(function() {
-
-	   jQuery.post( '/wp-content/themes/rolopress-core/library/includes/checkstatus.php', { usernames: skypenames }, function( data ) {
-			
-			data = eval(data);
-			console.log('data = ' + data);
-			console.log('refs = ' + refs);
-			for (var i=0; i < refs.length; i++)
-			{
-				console.log('datai = '+data[i]);
-				if (data[i] == "offline") 
-				{
-					refs[i].fadeTo('slow',0.5);
-				} else {
-					refs[i].fadeTo('slow',1);
-				}
-			}
-   		
-   		});
-	   
-   }, 60000);
-    	
-    
-  });
-</script> 
 
